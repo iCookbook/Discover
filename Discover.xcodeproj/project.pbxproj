@@ -22,6 +22,7 @@
 		F04DE419290AEA2900DD4C39 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE40C290AEA1E00DD4C39 /* DiscoverViewController.swift */; };
 		F04DE41A290AEA2C00DD4C39 /* DiscoverRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE40B290AEA1E00DD4C39 /* DiscoverRouter.swift */; };
 		F04DE41B290AEA2F00DD4C39 /* DiscoverPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE40A290AEA1E00DD4C39 /* DiscoverPresenter.swift */; };
+		F04DE426290AEA6600DD4C39 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F04DE425290AEA6600DD4C39 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		F04DE40D290AEA1E00DD4C39 /* DiscoverProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverProtocols.swift; sourceTree = "<group>"; };
 		F04DE40E290AEA1E00DD4C39 /* DiscoverAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverAssembly.swift; sourceTree = "<group>"; };
 		F04DE40F290AEA1E00DD4C39 /* DiscoverInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverInteractor.swift; sourceTree = "<group>"; };
+		F04DE425290AEA6600DD4C39 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 		F04DE3E8290AE9EB00DD4C39 = {
 			isa = PBXGroup;
 			children = (
+				F04DE425290AEA6600DD4C39 /* README.md */,
 				F04DE3F4290AE9EB00DD4C39 /* Discover */,
 				F04DE3FE290AE9EC00DD4C39 /* DiscoverTests */,
 				F04DE3F3290AE9EB00DD4C39 /* Products */,
@@ -200,6 +203,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F04DE426290AEA6600DD4C39 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
