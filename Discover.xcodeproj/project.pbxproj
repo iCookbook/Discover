@@ -7,95 +7,101 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F04DE361290ADF9700DD4C39 /* Discover.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F04DE358290ADF9700DD4C39 /* Discover.framework */; };
-		F04DE366290ADF9700DD4C39 /* DiscoverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE365290ADF9700DD4C39 /* DiscoverTests.swift */; };
-		F04DE389290ADFD600DD4C39 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F04DE388290ADFD600DD4C39 /* README.md */; };
-		F04DE3D9290AE46E00DD4C39 /* DiscoverPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE3D3290AE46E00DD4C39 /* DiscoverPresenter.swift */; };
-		F04DE3DA290AE46E00DD4C39 /* DiscoverRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE3D4290AE46E00DD4C39 /* DiscoverRouter.swift */; };
-		F04DE3DB290AE46E00DD4C39 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE3D5290AE46E00DD4C39 /* DiscoverViewController.swift */; };
-		F04DE3DC290AE46E00DD4C39 /* DiscoverProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE3D6290AE46E00DD4C39 /* DiscoverProtocols.swift */; };
-		F04DE3DD290AE46E00DD4C39 /* DiscoverAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE3D7290AE46E00DD4C39 /* DiscoverAssembly.swift */; };
-		F04DE3DE290AE46E00DD4C39 /* DiscoverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE3D8290AE46E00DD4C39 /* DiscoverInteractor.swift */; };
+		F04DE3FB290AE9EC00DD4C39 /* Discover.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F04DE3F2290AE9EB00DD4C39 /* Discover.framework */; };
+		F04DE400290AE9EC00DD4C39 /* DiscoverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE3FF290AE9EC00DD4C39 /* DiscoverTests.swift */; };
+		F04DE401290AE9EC00DD4C39 /* Discover.h in Headers */ = {isa = PBXBuildFile; fileRef = F04DE3F5290AE9EB00DD4C39 /* Discover.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F04DE410290AEA1E00DD4C39 /* DiscoverPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE40A290AEA1E00DD4C39 /* DiscoverPresenter.swift */; };
+		F04DE411290AEA1E00DD4C39 /* DiscoverRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE40B290AEA1E00DD4C39 /* DiscoverRouter.swift */; };
+		F04DE412290AEA1E00DD4C39 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE40C290AEA1E00DD4C39 /* DiscoverViewController.swift */; };
+		F04DE413290AEA1E00DD4C39 /* DiscoverProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE40D290AEA1E00DD4C39 /* DiscoverProtocols.swift */; };
+		F04DE414290AEA1E00DD4C39 /* DiscoverAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE40E290AEA1E00DD4C39 /* DiscoverAssembly.swift */; };
+		F04DE415290AEA1E00DD4C39 /* DiscoverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE40F290AEA1E00DD4C39 /* DiscoverInteractor.swift */; };
+		F04DE416290AEA2100DD4C39 /* DiscoverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE40F290AEA1E00DD4C39 /* DiscoverInteractor.swift */; };
+		F04DE417290AEA2400DD4C39 /* DiscoverAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE40E290AEA1E00DD4C39 /* DiscoverAssembly.swift */; };
+		F04DE418290AEA2700DD4C39 /* DiscoverProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE40D290AEA1E00DD4C39 /* DiscoverProtocols.swift */; };
+		F04DE419290AEA2900DD4C39 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE40C290AEA1E00DD4C39 /* DiscoverViewController.swift */; };
+		F04DE41A290AEA2C00DD4C39 /* DiscoverRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE40B290AEA1E00DD4C39 /* DiscoverRouter.swift */; };
+		F04DE41B290AEA2F00DD4C39 /* DiscoverPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE40A290AEA1E00DD4C39 /* DiscoverPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		F04DE362290ADF9700DD4C39 /* PBXContainerItemProxy */ = {
+		F04DE3FC290AE9EC00DD4C39 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F04DE34F290ADF9700DD4C39 /* Project object */;
+			containerPortal = F04DE3E9290AE9EB00DD4C39 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = F04DE357290ADF9700DD4C39;
+			remoteGlobalIDString = F04DE3F1290AE9EB00DD4C39;
 			remoteInfo = Discover;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F04DE358290ADF9700DD4C39 /* Discover.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Discover.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F04DE360290ADF9700DD4C39 /* DiscoverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F04DE365290ADF9700DD4C39 /* DiscoverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTests.swift; sourceTree = "<group>"; };
-		F04DE388290ADFD600DD4C39 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		F04DE3D3290AE46E00DD4C39 /* DiscoverPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverPresenter.swift; sourceTree = "<group>"; };
-		F04DE3D4290AE46E00DD4C39 /* DiscoverRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverRouter.swift; sourceTree = "<group>"; };
-		F04DE3D5290AE46E00DD4C39 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
-		F04DE3D6290AE46E00DD4C39 /* DiscoverProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverProtocols.swift; sourceTree = "<group>"; };
-		F04DE3D7290AE46E00DD4C39 /* DiscoverAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverAssembly.swift; sourceTree = "<group>"; };
-		F04DE3D8290AE46E00DD4C39 /* DiscoverInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverInteractor.swift; sourceTree = "<group>"; };
+		F04DE3F2290AE9EB00DD4C39 /* Discover.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Discover.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F04DE3F5290AE9EB00DD4C39 /* Discover.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Discover.h; sourceTree = "<group>"; };
+		F04DE3FA290AE9EC00DD4C39 /* DiscoverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F04DE3FF290AE9EC00DD4C39 /* DiscoverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTests.swift; sourceTree = "<group>"; };
+		F04DE40A290AEA1E00DD4C39 /* DiscoverPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverPresenter.swift; sourceTree = "<group>"; };
+		F04DE40B290AEA1E00DD4C39 /* DiscoverRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverRouter.swift; sourceTree = "<group>"; };
+		F04DE40C290AEA1E00DD4C39 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
+		F04DE40D290AEA1E00DD4C39 /* DiscoverProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverProtocols.swift; sourceTree = "<group>"; };
+		F04DE40E290AEA1E00DD4C39 /* DiscoverAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverAssembly.swift; sourceTree = "<group>"; };
+		F04DE40F290AEA1E00DD4C39 /* DiscoverInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		F04DE355290ADF9700DD4C39 /* Frameworks */ = {
+		F04DE3EF290AE9EB00DD4C39 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F04DE35D290ADF9700DD4C39 /* Frameworks */ = {
+		F04DE3F7290AE9EC00DD4C39 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F04DE361290ADF9700DD4C39 /* Discover.framework in Frameworks */,
+				F04DE3FB290AE9EC00DD4C39 /* Discover.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F04DE34E290ADF9700DD4C39 = {
+		F04DE3E8290AE9EB00DD4C39 = {
 			isa = PBXGroup;
 			children = (
-				F04DE388290ADFD600DD4C39 /* README.md */,
-				F04DE35A290ADF9700DD4C39 /* Discover */,
-				F04DE364290ADF9700DD4C39 /* DiscoverTests */,
-				F04DE359290ADF9700DD4C39 /* Products */,
+				F04DE3F4290AE9EB00DD4C39 /* Discover */,
+				F04DE3FE290AE9EC00DD4C39 /* DiscoverTests */,
+				F04DE3F3290AE9EB00DD4C39 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		F04DE359290ADF9700DD4C39 /* Products */ = {
+		F04DE3F3290AE9EB00DD4C39 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F04DE358290ADF9700DD4C39 /* Discover.framework */,
-				F04DE360290ADF9700DD4C39 /* DiscoverTests.xctest */,
+				F04DE3F2290AE9EB00DD4C39 /* Discover.framework */,
+				F04DE3FA290AE9EC00DD4C39 /* DiscoverTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F04DE35A290ADF9700DD4C39 /* Discover */ = {
+		F04DE3F4290AE9EB00DD4C39 /* Discover */ = {
 			isa = PBXGroup;
 			children = (
-				F04DE3D3290AE46E00DD4C39 /* DiscoverPresenter.swift */,
-				F04DE3D4290AE46E00DD4C39 /* DiscoverRouter.swift */,
-				F04DE3D5290AE46E00DD4C39 /* DiscoverViewController.swift */,
-				F04DE3D6290AE46E00DD4C39 /* DiscoverProtocols.swift */,
-				F04DE3D7290AE46E00DD4C39 /* DiscoverAssembly.swift */,
-				F04DE3D8290AE46E00DD4C39 /* DiscoverInteractor.swift */,
+				F04DE3F5290AE9EB00DD4C39 /* Discover.h */,
+				F04DE40A290AEA1E00DD4C39 /* DiscoverPresenter.swift */,
+				F04DE40B290AEA1E00DD4C39 /* DiscoverRouter.swift */,
+				F04DE40C290AEA1E00DD4C39 /* DiscoverViewController.swift */,
+				F04DE40D290AEA1E00DD4C39 /* DiscoverProtocols.swift */,
+				F04DE40E290AEA1E00DD4C39 /* DiscoverAssembly.swift */,
+				F04DE40F290AEA1E00DD4C39 /* DiscoverInteractor.swift */,
 			);
 			path = Discover;
 			sourceTree = "<group>";
 		};
-		F04DE364290ADF9700DD4C39 /* DiscoverTests */ = {
+		F04DE3FE290AE9EC00DD4C39 /* DiscoverTests */ = {
 			isa = PBXGroup;
 			children = (
-				F04DE365290ADF9700DD4C39 /* DiscoverTests.swift */,
+				F04DE3FF290AE9EC00DD4C39 /* DiscoverTests.swift */,
 			);
 			path = DiscoverTests;
 			sourceTree = "<group>";
@@ -103,24 +109,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		F04DE353290ADF9700DD4C39 /* Headers */ = {
+		F04DE3ED290AE9EB00DD4C39 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F04DE401290AE9EC00DD4C39 /* Discover.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		F04DE357290ADF9700DD4C39 /* Discover */ = {
+		F04DE3F1290AE9EB00DD4C39 /* Discover */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F04DE36A290ADF9700DD4C39 /* Build configuration list for PBXNativeTarget "Discover" */;
+			buildConfigurationList = F04DE404290AE9EC00DD4C39 /* Build configuration list for PBXNativeTarget "Discover" */;
 			buildPhases = (
-				F04DE353290ADF9700DD4C39 /* Headers */,
-				F04DE354290ADF9700DD4C39 /* Sources */,
-				F04DE355290ADF9700DD4C39 /* Frameworks */,
-				F04DE356290ADF9700DD4C39 /* Resources */,
+				F04DE3ED290AE9EB00DD4C39 /* Headers */,
+				F04DE3EE290AE9EB00DD4C39 /* Sources */,
+				F04DE3EF290AE9EB00DD4C39 /* Frameworks */,
+				F04DE3F0290AE9EB00DD4C39 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -128,75 +135,75 @@
 			);
 			name = Discover;
 			productName = Discover;
-			productReference = F04DE358290ADF9700DD4C39 /* Discover.framework */;
+			productReference = F04DE3F2290AE9EB00DD4C39 /* Discover.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		F04DE35F290ADF9700DD4C39 /* DiscoverTests */ = {
+		F04DE3F9290AE9EC00DD4C39 /* DiscoverTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F04DE36D290ADF9700DD4C39 /* Build configuration list for PBXNativeTarget "DiscoverTests" */;
+			buildConfigurationList = F04DE407290AE9EC00DD4C39 /* Build configuration list for PBXNativeTarget "DiscoverTests" */;
 			buildPhases = (
-				F04DE35C290ADF9700DD4C39 /* Sources */,
-				F04DE35D290ADF9700DD4C39 /* Frameworks */,
-				F04DE35E290ADF9700DD4C39 /* Resources */,
+				F04DE3F6290AE9EC00DD4C39 /* Sources */,
+				F04DE3F7290AE9EC00DD4C39 /* Frameworks */,
+				F04DE3F8290AE9EC00DD4C39 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				F04DE363290ADF9700DD4C39 /* PBXTargetDependency */,
+				F04DE3FD290AE9EC00DD4C39 /* PBXTargetDependency */,
 			);
 			name = DiscoverTests;
 			productName = DiscoverTests;
-			productReference = F04DE360290ADF9700DD4C39 /* DiscoverTests.xctest */;
+			productReference = F04DE3FA290AE9EC00DD4C39 /* DiscoverTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		F04DE34F290ADF9700DD4C39 /* Project object */ = {
+		F04DE3E9290AE9EB00DD4C39 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
-					F04DE357290ADF9700DD4C39 = {
+					F04DE3F1290AE9EB00DD4C39 = {
 						CreatedOnToolsVersion = 13.4.1;
 						LastSwiftMigration = 1340;
 					};
-					F04DE35F290ADF9700DD4C39 = {
+					F04DE3F9290AE9EC00DD4C39 = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
 				};
 			};
-			buildConfigurationList = F04DE352290ADF9700DD4C39 /* Build configuration list for PBXProject "Discover" */;
+			buildConfigurationList = F04DE3EC290AE9EB00DD4C39 /* Build configuration list for PBXProject "Discover" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
-			mainGroup = F04DE34E290ADF9700DD4C39;
-			productRefGroup = F04DE359290ADF9700DD4C39 /* Products */;
+			mainGroup = F04DE3E8290AE9EB00DD4C39;
+			productRefGroup = F04DE3F3290AE9EB00DD4C39 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F04DE357290ADF9700DD4C39 /* Discover */,
-				F04DE35F290ADF9700DD4C39 /* DiscoverTests */,
+				F04DE3F1290AE9EB00DD4C39 /* Discover */,
+				F04DE3F9290AE9EC00DD4C39 /* DiscoverTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		F04DE356290ADF9700DD4C39 /* Resources */ = {
+		F04DE3F0290AE9EB00DD4C39 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F04DE389290ADFD600DD4C39 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F04DE35E290ADF9700DD4C39 /* Resources */ = {
+		F04DE3F8290AE9EC00DD4C39 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -206,39 +213,45 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		F04DE354290ADF9700DD4C39 /* Sources */ = {
+		F04DE3EE290AE9EB00DD4C39 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F04DE3DB290AE46E00DD4C39 /* DiscoverViewController.swift in Sources */,
-				F04DE3D9290AE46E00DD4C39 /* DiscoverPresenter.swift in Sources */,
-				F04DE3DD290AE46E00DD4C39 /* DiscoverAssembly.swift in Sources */,
-				F04DE3DE290AE46E00DD4C39 /* DiscoverInteractor.swift in Sources */,
-				F04DE3DC290AE46E00DD4C39 /* DiscoverProtocols.swift in Sources */,
-				F04DE3DA290AE46E00DD4C39 /* DiscoverRouter.swift in Sources */,
+				F04DE412290AEA1E00DD4C39 /* DiscoverViewController.swift in Sources */,
+				F04DE410290AEA1E00DD4C39 /* DiscoverPresenter.swift in Sources */,
+				F04DE414290AEA1E00DD4C39 /* DiscoverAssembly.swift in Sources */,
+				F04DE415290AEA1E00DD4C39 /* DiscoverInteractor.swift in Sources */,
+				F04DE413290AEA1E00DD4C39 /* DiscoverProtocols.swift in Sources */,
+				F04DE411290AEA1E00DD4C39 /* DiscoverRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F04DE35C290ADF9700DD4C39 /* Sources */ = {
+		F04DE3F6290AE9EC00DD4C39 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F04DE366290ADF9700DD4C39 /* DiscoverTests.swift in Sources */,
+				F04DE417290AEA2400DD4C39 /* DiscoverAssembly.swift in Sources */,
+				F04DE41B290AEA2F00DD4C39 /* DiscoverPresenter.swift in Sources */,
+				F04DE400290AE9EC00DD4C39 /* DiscoverTests.swift in Sources */,
+				F04DE418290AEA2700DD4C39 /* DiscoverProtocols.swift in Sources */,
+				F04DE41A290AEA2C00DD4C39 /* DiscoverRouter.swift in Sources */,
+				F04DE416290AEA2100DD4C39 /* DiscoverInteractor.swift in Sources */,
+				F04DE419290AEA2900DD4C39 /* DiscoverViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		F04DE363290ADF9700DD4C39 /* PBXTargetDependency */ = {
+		F04DE3FD290AE9EC00DD4C39 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F04DE357290ADF9700DD4C39 /* Discover */;
-			targetProxy = F04DE362290ADF9700DD4C39 /* PBXContainerItemProxy */;
+			target = F04DE3F1290AE9EB00DD4C39 /* Discover */;
+			targetProxy = F04DE3FC290AE9EC00DD4C39 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		F04DE368290ADF9700DD4C39 /* Debug */ = {
+		F04DE402290AE9EC00DD4C39 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -301,7 +314,7 @@
 			};
 			name = Debug;
 		};
-		F04DE369290ADF9700DD4C39 /* Release */ = {
+		F04DE403290AE9EC00DD4C39 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -358,7 +371,7 @@
 			};
 			name = Release;
 		};
-		F04DE36B290ADF9700DD4C39 /* Debug */ = {
+		F04DE405290AE9EC00DD4C39 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -389,7 +402,7 @@
 			};
 			name = Debug;
 		};
-		F04DE36C290ADF9700DD4C39 /* Release */ = {
+		F04DE406290AE9EC00DD4C39 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -419,7 +432,7 @@
 			};
 			name = Release;
 		};
-		F04DE36E290ADF9700DD4C39 /* Debug */ = {
+		F04DE408290AE9EC00DD4C39 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -436,7 +449,7 @@
 			};
 			name = Debug;
 		};
-		F04DE36F290ADF9700DD4C39 /* Release */ = {
+		F04DE409290AE9EC00DD4C39 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -456,34 +469,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F04DE352290ADF9700DD4C39 /* Build configuration list for PBXProject "Discover" */ = {
+		F04DE3EC290AE9EB00DD4C39 /* Build configuration list for PBXProject "Discover" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F04DE368290ADF9700DD4C39 /* Debug */,
-				F04DE369290ADF9700DD4C39 /* Release */,
+				F04DE402290AE9EC00DD4C39 /* Debug */,
+				F04DE403290AE9EC00DD4C39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F04DE36A290ADF9700DD4C39 /* Build configuration list for PBXNativeTarget "Discover" */ = {
+		F04DE404290AE9EC00DD4C39 /* Build configuration list for PBXNativeTarget "Discover" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F04DE36B290ADF9700DD4C39 /* Debug */,
-				F04DE36C290ADF9700DD4C39 /* Release */,
+				F04DE405290AE9EC00DD4C39 /* Debug */,
+				F04DE406290AE9EC00DD4C39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F04DE36D290ADF9700DD4C39 /* Build configuration list for PBXNativeTarget "DiscoverTests" */ = {
+		F04DE407290AE9EC00DD4C39 /* Build configuration list for PBXNativeTarget "DiscoverTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F04DE36E290ADF9700DD4C39 /* Debug */,
-				F04DE36F290ADF9700DD4C39 /* Release */,
+				F04DE408290AE9EC00DD4C39 /* Debug */,
+				F04DE409290AE9EC00DD4C39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = F04DE34F290ADF9700DD4C39 /* Project object */;
+	rootObject = F04DE3E9290AE9EB00DD4C39 /* Project object */;
 }
