@@ -28,7 +28,8 @@
 		F053664C290FD38C00A1CE22 /* CommonUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F053664A290FD38C00A1CE22 /* CommonUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F053666E290FE15800A1CE22 /* Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F053666D290FE15700A1CE22 /* Models.framework */; };
 		F053666F290FE15800A1CE22 /* Models.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F053666D290FE15700A1CE22 /* Models.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F062D3ED290FB824005EA844 /* DiscoverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062D3EC290FB824005EA844 /* DiscoverCollectionViewCell.swift */; };
+		F05366852910547F00A1CE22 /* UsualCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05366842910547F00A1CE22 /* UsualCollectionViewCell.swift */; };
+		F0536687291056D200A1CE22 /* UsualBCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0536686291056D200A1CE22 /* UsualBCollectionViewCell.swift */; };
 		F062D41F290FBC0E005EA844 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F062D41E290FBC0E005EA844 /* Networking.framework */; };
 		F062D420290FBC0E005EA844 /* Networking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F062D41E290FBC0E005EA844 /* Networking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -75,7 +76,8 @@
 		F05365F7290FC23000A1CE22 /* Resources.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Resources.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F053664A290FD38C00A1CE22 /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F053666D290FE15700A1CE22 /* Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F062D3EC290FB824005EA844 /* DiscoverCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewCell.swift; sourceTree = "<group>"; };
+		F05366842910547F00A1CE22 /* UsualCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsualCollectionViewCell.swift; sourceTree = "<group>"; };
+		F0536686291056D200A1CE22 /* UsualBCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsualBCollectionViewCell.swift; sourceTree = "<group>"; };
 		F062D41E290FBC0E005EA844 /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -148,7 +150,8 @@
 			isa = PBXGroup;
 			children = (
 				F04DE40C290AEA1E00DD4C39 /* DiscoverViewController.swift */,
-				F062D3EC290FB824005EA844 /* DiscoverCollectionViewCell.swift */,
+				F05366842910547F00A1CE22 /* UsualCollectionViewCell.swift */,
+				F0536686291056D200A1CE22 /* UsualBCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -279,10 +282,11 @@
 				F04DE412290AEA1E00DD4C39 /* DiscoverViewController.swift in Sources */,
 				F04DE410290AEA1E00DD4C39 /* DiscoverPresenter.swift in Sources */,
 				F04DE414290AEA1E00DD4C39 /* DiscoverAssembly.swift in Sources */,
+				F05366852910547F00A1CE22 /* UsualCollectionViewCell.swift in Sources */,
+				F0536687291056D200A1CE22 /* UsualBCollectionViewCell.swift in Sources */,
 				F04DE415290AEA1E00DD4C39 /* DiscoverInteractor.swift in Sources */,
 				F04DE413290AEA1E00DD4C39 /* DiscoverProtocols.swift in Sources */,
 				F04DE411290AEA1E00DD4C39 /* DiscoverRouter.swift in Sources */,
-				F062D3ED290FB824005EA844 /* DiscoverCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

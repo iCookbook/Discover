@@ -20,13 +20,14 @@ final class DiscoverViewController: UIViewController {
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: view.frame.size.width - 32, height: view.frame.size.height * 0.2)
+        layout.itemSize = CGSize(width: view.frame.size.width - 32, height: view.frame.size.height * 0.38)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 40, right: 0)
-        collectionView.register(DiscoverCollectionViewCell.self, forCellWithReuseIdentifier: DiscoverCollectionViewCell.identifier)
+        collectionView.register(UsualCollectionViewCell.self, forCellWithReuseIdentifier: UsualCollectionViewCell.identifier)
+        collectionView.register(UsualBCollectionViewCell.self, forCellWithReuseIdentifier: UsualBCollectionViewCell.identifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -92,12 +93,26 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DiscoverCollectionViewCell.identifier, for: indexPath) as? DiscoverCollectionViewCell else {
-            fatalError("Could not cast 'UICollectionViewCell' to 'DiscoverCollectionViewCell' in 'Discover' module")
+        switch indexPath.row % 2 {
+        case 0:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UsualCollectionViewCell.identifier, for: indexPath) as? UsualCollectionViewCell else {
+                fatalError("Could not cast 'UICollectionViewCell' to 'UsualCollectionViewCell' in 'Discover' module")
+            }
+            cell.configure(with: data?[indexPath.row])
+            return cell
+        case 1:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UsualBCollectionViewCell.identifier, for: indexPath) as? UsualBCollectionViewCell else {
+                fatalError("Could not cast 'UICollectionViewCell' to 'UsualBCollectionViewCell' in 'Discover' module")
+            }
+            cell.configure(with: data?[indexPath.row])
+            return cell
+        default:
+            fatalError("Unexpected value in switch: \(indexPath.row % 2)")
         }
-        cell.configure(with: data?[indexPath.row], for: DiscoverCollectionViewCellType(rawValue: indexPath.row % 3) ?? .usual)
-//        cell.configure(with: data?[indexPath.row], for: .dishOfTheDay)
-//        print(data?[indexPath.row].image, data?[indexPath.row].images?.regular)
-        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let recipe = data?[indexPath.row] else { return }
+        output.didSelectRecipe(recipe)
     }
 }

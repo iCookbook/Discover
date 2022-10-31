@@ -23,6 +23,7 @@ protocol DiscoverViewInput: AnyObject {
 
 protocol DiscoverViewOutput: AnyObject {
     func requestData()
+    func didSelectRecipe(_ recipe: Recipe)
 }
 
 protocol DiscoverInteractorInput: AnyObject {
