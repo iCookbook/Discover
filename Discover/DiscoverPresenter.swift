@@ -55,7 +55,7 @@ extension DiscoverPresenter: DiscoverInteractorOutput {
         case .retainCycle:
             view?.showAlert(title: "Unexpected error", message: "")
         case .networkError(let error):
-            view?.showAlert(title: "Unexpected error", message: "\(error)")
+            view?.showAlert(title: "Unexpected error", message: "\(error.localizedDescription)")
         case .parsingJSONError:
             view?.showAlert(title: "Internet error", message: "")
         }

@@ -95,8 +95,9 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DiscoverCollectionViewCell.identifier, for: indexPath) as? DiscoverCollectionViewCell else {
             fatalError("Could not cast 'UICollectionViewCell' to 'DiscoverCollectionViewCell' in 'Discover' module")
         }
-//        cell.configure(with: data?[indexPath.row], for: DiscoverCollectionViewCellType(rawValue: indexPath.row % 3) ?? .usual)
-        cell.configure(with: data?[indexPath.row], for: .usual)
+        cell.configure(with: data?[indexPath.row], for: DiscoverCollectionViewCellType(rawValue: indexPath.row % 3) ?? .usual)
+//        cell.configure(with: data?[indexPath.row], for: .dishOfTheDay)
+//        print(data?[indexPath.row].image, data?[indexPath.row].images?.regular)
         return cell
     }
 }
