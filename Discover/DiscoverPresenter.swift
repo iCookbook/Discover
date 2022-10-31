@@ -29,6 +29,9 @@ extension DiscoverPresenter: DiscoverModuleInput {
 }
 
 extension DiscoverPresenter: DiscoverViewOutput {
+    func requestData() {
+        interactor.requestData()
+    }
 }
 
 extension DiscoverPresenter: DiscoverInteractorOutput {

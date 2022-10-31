@@ -6,7 +6,7 @@
 //  
 //
 
-import Foundation
+import Models
 
 public protocol DiscoverModuleInput {
     var moduleOutput: DiscoverModuleOutput? { get }
@@ -19,9 +19,11 @@ protocol DiscoverViewInput: AnyObject {
 }
 
 protocol DiscoverViewOutput: AnyObject {
+    func requestData()
 }
 
 protocol DiscoverInteractorInput: AnyObject {
+    func requestData()
 }
 
 protocol DiscoverInteractorOutput: AnyObject {

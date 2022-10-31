@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Networking
 
 public final class DiscoverAssembly {
     
@@ -23,7 +24,7 @@ public final class DiscoverAssembly {
     
     public static func assemble(with context: DiscoverContext) -> DiscoverAssembly {
         let router = DiscoverRouter()
-        let interactor = DiscoverInteractor()
+        let interactor = DiscoverInteractor(networkManager: context.moduleDependency)
         let presenter = DiscoverPresenter(router: router, interactor: interactor)
         let viewController = DiscoverViewController(output: presenter)
         
@@ -47,8 +48,10 @@ public final class DiscoverAssembly {
 
 public struct DiscoverContext {
     weak var moduleOutput: DiscoverModuleOutput?
+    let moduleDependency: NetworkManagerProtocol
     
-    public init(moduleOutput: DiscoverModuleOutput?) {
+    public init(moduleOutput: DiscoverModuleOutput? = nil, moduleDependency: NetworkManagerProtocol) {
         self.moduleOutput = moduleOutput
+        self.moduleDependency = moduleDependency
     }
 }

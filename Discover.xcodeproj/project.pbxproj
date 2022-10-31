@@ -22,7 +22,11 @@
 		F04DE419290AEA2900DD4C39 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE40C290AEA1E00DD4C39 /* DiscoverViewController.swift */; };
 		F04DE41A290AEA2C00DD4C39 /* DiscoverRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE40B290AEA1E00DD4C39 /* DiscoverRouter.swift */; };
 		F04DE41B290AEA2F00DD4C39 /* DiscoverPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE40A290AEA1E00DD4C39 /* DiscoverPresenter.swift */; };
-		F04DE426290AEA6600DD4C39 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F04DE425290AEA6600DD4C39 /* README.md */; };
+		F05365F8290FC23000A1CE22 /* Resources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F05365F7290FC23000A1CE22 /* Resources.framework */; };
+		F05365F9290FC23000A1CE22 /* Resources.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F05365F7290FC23000A1CE22 /* Resources.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F062D3ED290FB824005EA844 /* DiscoverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062D3EC290FB824005EA844 /* DiscoverCollectionViewCell.swift */; };
+		F062D41F290FBC0E005EA844 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F062D41E290FBC0E005EA844 /* Networking.framework */; };
+		F062D420290FBC0E005EA844 /* Networking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F062D41E290FBC0E005EA844 /* Networking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +38,21 @@
 			remoteInfo = Discover;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F062D421290FBC0E005EA844 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F05365F9290FC23000A1CE22 /* Resources.framework in Embed Frameworks */,
+				F062D420290FBC0E005EA844 /* Networking.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		F04DE3F2290AE9EB00DD4C39 /* Discover.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Discover.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +66,9 @@
 		F04DE40E290AEA1E00DD4C39 /* DiscoverAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverAssembly.swift; sourceTree = "<group>"; };
 		F04DE40F290AEA1E00DD4C39 /* DiscoverInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverInteractor.swift; sourceTree = "<group>"; };
 		F04DE425290AEA6600DD4C39 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F05365F7290FC23000A1CE22 /* Resources.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Resources.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F062D3EC290FB824005EA844 /* DiscoverCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewCell.swift; sourceTree = "<group>"; };
+		F062D41E290FBC0E005EA844 /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +76,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F05365F8290FC23000A1CE22 /* Resources.framework in Frameworks */,
+				F062D41F290FBC0E005EA844 /* Networking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +99,7 @@
 				F04DE3F4290AE9EB00DD4C39 /* Discover */,
 				F04DE3FE290AE9EC00DD4C39 /* DiscoverTests */,
 				F04DE3F3290AE9EB00DD4C39 /* Products */,
+				F062D41D290FBC0E005EA844 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,11 +117,11 @@
 			children = (
 				F04DE3F5290AE9EB00DD4C39 /* Discover.h */,
 				F04DE40A290AEA1E00DD4C39 /* DiscoverPresenter.swift */,
+				F04DE40F290AEA1E00DD4C39 /* DiscoverInteractor.swift */,
 				F04DE40B290AEA1E00DD4C39 /* DiscoverRouter.swift */,
-				F04DE40C290AEA1E00DD4C39 /* DiscoverViewController.swift */,
 				F04DE40D290AEA1E00DD4C39 /* DiscoverProtocols.swift */,
 				F04DE40E290AEA1E00DD4C39 /* DiscoverAssembly.swift */,
-				F04DE40F290AEA1E00DD4C39 /* DiscoverInteractor.swift */,
+				F062D3EB290FB815005EA844 /* Views */,
 			);
 			path = Discover;
 			sourceTree = "<group>";
@@ -107,6 +132,24 @@
 				F04DE3FF290AE9EC00DD4C39 /* DiscoverTests.swift */,
 			);
 			path = DiscoverTests;
+			sourceTree = "<group>";
+		};
+		F062D3EB290FB815005EA844 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F04DE40C290AEA1E00DD4C39 /* DiscoverViewController.swift */,
+				F062D3EC290FB824005EA844 /* DiscoverCollectionViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F062D41D290FBC0E005EA844 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F05365F7290FC23000A1CE22 /* Resources.framework */,
+				F062D41E290FBC0E005EA844 /* Networking.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,6 +174,7 @@
 				F04DE3EE290AE9EB00DD4C39 /* Sources */,
 				F04DE3EF290AE9EB00DD4C39 /* Frameworks */,
 				F04DE3F0290AE9EB00DD4C39 /* Resources */,
+				F062D421290FBC0E005EA844 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -203,7 +247,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F04DE426290AEA6600DD4C39 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +270,7 @@
 				F04DE415290AEA1E00DD4C39 /* DiscoverInteractor.swift in Sources */,
 				F04DE413290AEA1E00DD4C39 /* DiscoverProtocols.swift in Sources */,
 				F04DE411290AEA1E00DD4C39 /* DiscoverRouter.swift in Sources */,
+				F062D3ED290FB824005EA844 /* DiscoverCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
