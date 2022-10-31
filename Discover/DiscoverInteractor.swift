@@ -29,10 +29,9 @@ extension DiscoverInteractor: DiscoverInteractorInput {
         networkManager.perform(request: request) { [unowned self] (result: Result<Response, NetworkManagerError>) in
             switch result {
             case .success(let response):
-//                print(response.hits?[0].recipe)
-                print("✅ SUCCESS")
+                output?.provideResponse(response)
             case .failure(let error):
-                print("❗️ERROR: \(error)")
+                output?.handleError(error)
             }
         }
     }

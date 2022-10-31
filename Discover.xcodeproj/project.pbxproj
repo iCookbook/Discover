@@ -24,6 +24,10 @@
 		F04DE41B290AEA2F00DD4C39 /* DiscoverPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04DE40A290AEA1E00DD4C39 /* DiscoverPresenter.swift */; };
 		F05365F8290FC23000A1CE22 /* Resources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F05365F7290FC23000A1CE22 /* Resources.framework */; };
 		F05365F9290FC23000A1CE22 /* Resources.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F05365F7290FC23000A1CE22 /* Resources.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F053664B290FD38C00A1CE22 /* CommonUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F053664A290FD38C00A1CE22 /* CommonUI.framework */; };
+		F053664C290FD38C00A1CE22 /* CommonUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F053664A290FD38C00A1CE22 /* CommonUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F053666E290FE15800A1CE22 /* Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F053666D290FE15700A1CE22 /* Models.framework */; };
+		F053666F290FE15800A1CE22 /* Models.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F053666D290FE15700A1CE22 /* Models.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F062D3ED290FB824005EA844 /* DiscoverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F062D3EC290FB824005EA844 /* DiscoverCollectionViewCell.swift */; };
 		F062D41F290FBC0E005EA844 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F062D41E290FBC0E005EA844 /* Networking.framework */; };
 		F062D420290FBC0E005EA844 /* Networking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F062D41E290FBC0E005EA844 /* Networking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -46,6 +50,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F053666F290FE15800A1CE22 /* Models.framework in Embed Frameworks */,
+				F053664C290FD38C00A1CE22 /* CommonUI.framework in Embed Frameworks */,
 				F05365F9290FC23000A1CE22 /* Resources.framework in Embed Frameworks */,
 				F062D420290FBC0E005EA844 /* Networking.framework in Embed Frameworks */,
 			);
@@ -67,6 +73,8 @@
 		F04DE40F290AEA1E00DD4C39 /* DiscoverInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverInteractor.swift; sourceTree = "<group>"; };
 		F04DE425290AEA6600DD4C39 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F05365F7290FC23000A1CE22 /* Resources.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Resources.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F053664A290FD38C00A1CE22 /* CommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F053666D290FE15700A1CE22 /* Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F062D3EC290FB824005EA844 /* DiscoverCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewCell.swift; sourceTree = "<group>"; };
 		F062D41E290FBC0E005EA844 /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -76,6 +84,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F053666E290FE15800A1CE22 /* Models.framework in Frameworks */,
+				F053664B290FD38C00A1CE22 /* CommonUI.framework in Frameworks */,
 				F05365F8290FC23000A1CE22 /* Resources.framework in Frameworks */,
 				F062D41F290FBC0E005EA844 /* Networking.framework in Frameworks */,
 			);
@@ -146,6 +156,8 @@
 		F062D41D290FBC0E005EA844 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F053666D290FE15700A1CE22 /* Models.framework */,
+				F053664A290FD38C00A1CE22 /* CommonUI.framework */,
 				F05365F7290FC23000A1CE22 /* Resources.framework */,
 				F062D41E290FBC0E005EA844 /* Networking.framework */,
 			);

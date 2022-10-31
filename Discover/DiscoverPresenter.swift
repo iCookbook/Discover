@@ -6,7 +6,8 @@
 //  
 //
 
-import Foundation
+import Models
+import Networking
 
 final class DiscoverPresenter {
     weak var view: DiscoverViewInput?
@@ -35,4 +36,28 @@ extension DiscoverPresenter: DiscoverViewOutput {
 }
 
 extension DiscoverPresenter: DiscoverInteractorOutput {
+    func provideResponse(_ response: Response) {
+        guard let hits = response.hits else { return }
+        var recipes = [Recipe]()
+        
+        for hit in hits {
+            if let recipe = hit.recipe {
+                recipes.append(recipe)
+            }
+        }
+        view?.fillData(with: recipes)
+    }
+    
+    func handleError(_ error: NetworkManagerError) {
+        switch error {
+        case .invalidURL:
+            view?.showAlert(title: "Invalid url", message: "")
+        case .retainCycle:
+            view?.showAlert(title: "Unexpected error", message: "")
+        case .networkError(let error):
+            view?.showAlert(title: "Unexpected error", message: "\(error)")
+        case .parsingJSONError:
+            view?.showAlert(title: "Internet error", message: "")
+        }
+    }
 }

@@ -7,6 +7,7 @@
 //
 
 import Models
+import Networking
 
 public protocol DiscoverModuleInput {
     var moduleOutput: DiscoverModuleOutput? { get }
@@ -16,6 +17,8 @@ public protocol DiscoverModuleOutput: AnyObject {
 }
 
 protocol DiscoverViewInput: AnyObject {
+    func fillData(with data: [Recipe])
+    func showAlert(title: String, message: String)
 }
 
 protocol DiscoverViewOutput: AnyObject {
@@ -27,6 +30,8 @@ protocol DiscoverInteractorInput: AnyObject {
 }
 
 protocol DiscoverInteractorOutput: AnyObject {
+    func provideResponse(_ response: Response)
+    func handleError(_ error: NetworkManagerError)
 }
 
 protocol DiscoverRouterInput: AnyObject {
