@@ -98,19 +98,19 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
         switch indexPath.row % 3 {
         case 0:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UsualCollectionViewCell.identifier, for: indexPath) as? UsualCollectionViewCell else {
-                fatalError("Could not cast 'UICollectionViewCell' to 'UsualCollectionViewCell' in 'Discover' module")
+                fatalError("Could not cast cell at indexPath \(indexPath) to 'UsualCollectionViewCell' in 'Discover' module")
             }
             cell.configure(with: data?[indexPath.row])
             return cell
         case 1:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LargeRecipeCollectionViewCell.identifier, for: indexPath) as? LargeRecipeCollectionViewCell else {
-                fatalError("Could not cast 'UICollectionViewCell' to 'LargeRecipeCollectionViewCell' in 'Discover' module")
+                fatalError("Could not cast cell at indexPath \(indexPath) to 'LargeRecipeCollectionViewCell' in 'Discover' module")
             }
             cell.configure(with: data?[indexPath.row], dishOfTheDayLabelIsHidden: true)
             return cell
         case 2:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UsualBCollectionViewCell.identifier, for: indexPath) as? UsualBCollectionViewCell else {
-                fatalError("Could not cast 'UICollectionViewCell' to 'UsualBCollectionViewCell' in 'Discover' module")
+                fatalError("Could not cast cell at indexPath \(indexPath) to 'UsualBCollectionViewCell' in 'Discover' module")
             }
             cell.configure(with: data?[indexPath.row])
             return cell
