@@ -36,6 +36,7 @@ protocol DiscoverInteractorOutput: AnyObject {
 }
 
 protocol DiscoverRouterInput: AnyObject {
+    func openRecipeDetailsModule(for recipe: Recipe)
 }
 
 protocol DiscoverRouterOutput: AnyObject {

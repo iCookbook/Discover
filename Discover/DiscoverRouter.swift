@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Models
 
 final class DiscoverRouter {
     weak var output: DiscoverRouterOutput?
@@ -14,4 +15,8 @@ final class DiscoverRouter {
 }
 
 extension DiscoverRouter: DiscoverRouterInput {
+    
+    func openRecipeDetailsModule(for recipe: Recipe) {
+        
+    }
 }

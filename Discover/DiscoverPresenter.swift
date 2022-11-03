@@ -33,6 +33,10 @@ extension DiscoverPresenter: DiscoverViewOutput {
     func requestData() {
         interactor.requestData()
     }
+    
+    func didSelectRecipe(_ recipe: Recipe) {
+        router.openRecipeDetailsModule(for: recipe)
+    }
 }
 
 extension DiscoverPresenter: DiscoverInteractorOutput {

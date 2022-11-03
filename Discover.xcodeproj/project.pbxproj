@@ -32,6 +32,8 @@
 		F0536687291056D200A1CE22 /* UsualBCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0536686291056D200A1CE22 /* UsualBCollectionViewCell.swift */; };
 		F062D41F290FBC0E005EA844 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F062D41E290FBC0E005EA844 /* Networking.framework */; };
 		F062D420290FBC0E005EA844 /* Networking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F062D41E290FBC0E005EA844 /* Networking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F06E0AC92911B94500449168 /* UsualBCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0536686291056D200A1CE22 /* UsualBCollectionViewCell.swift */; };
+		F06E0ACA2911B94800449168 /* UsualCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05366842910547F00A1CE22 /* UsualCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,13 +129,13 @@
 		F04DE3F4290AE9EB00DD4C39 /* Discover */ = {
 			isa = PBXGroup;
 			children = (
-				F04DE3F5290AE9EB00DD4C39 /* Discover.h */,
 				F04DE40A290AEA1E00DD4C39 /* DiscoverPresenter.swift */,
 				F04DE40F290AEA1E00DD4C39 /* DiscoverInteractor.swift */,
 				F04DE40B290AEA1E00DD4C39 /* DiscoverRouter.swift */,
 				F04DE40D290AEA1E00DD4C39 /* DiscoverProtocols.swift */,
 				F04DE40E290AEA1E00DD4C39 /* DiscoverAssembly.swift */,
 				F062D3EB290FB815005EA844 /* Views */,
+				F04DE3F5290AE9EB00DD4C39 /* Discover.h */,
 			);
 			path = Discover;
 			sourceTree = "<group>";
@@ -298,7 +300,9 @@
 				F04DE41B290AEA2F00DD4C39 /* DiscoverPresenter.swift in Sources */,
 				F04DE400290AE9EC00DD4C39 /* DiscoverTests.swift in Sources */,
 				F04DE418290AEA2700DD4C39 /* DiscoverProtocols.swift in Sources */,
+				F06E0AC92911B94500449168 /* UsualBCollectionViewCell.swift in Sources */,
 				F04DE41A290AEA2C00DD4C39 /* DiscoverRouter.swift in Sources */,
+				F06E0ACA2911B94800449168 /* UsualCollectionViewCell.swift in Sources */,
 				F04DE416290AEA2100DD4C39 /* DiscoverInteractor.swift in Sources */,
 				F04DE419290AEA2900DD4C39 /* DiscoverViewController.swift in Sources */,
 			);

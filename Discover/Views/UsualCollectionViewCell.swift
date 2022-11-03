@@ -17,8 +17,9 @@ final class UsualCollectionViewCell: DiscoverCollectionViewCell {
     private let recipeTertiaryLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = Colors.transparentTitleLabel
+        label.textColor = .white
         label.numberOfLines = 2
+        label.layer.zPosition = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -26,9 +27,13 @@ final class UsualCollectionViewCell: DiscoverCollectionViewCell {
     override func setupView() {
         super.setupView()
         
-        [recipeImageView, recipeSubtitleLabel, recipeTitleLabel, recipeTertiaryLabel].forEach {
+        [recipeSubtitleLabel, recipeTitleLabel, recipeTertiaryLabel, recipeImageView].forEach {
             contentView.addSubview($0)
         }
+        
+        addShadows(to: recipeTitleLabel, with: 0.6)
+        addShadows(to: recipeSubtitleLabel, with: 0.6)
+        addShadows(to: recipeTertiaryLabel, with: 0.4)
         
         NSLayoutConstraint.activate([
             recipeImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor),
@@ -54,9 +59,23 @@ final class UsualCollectionViewCell: DiscoverCollectionViewCell {
     
     public func configure(with data: Recipe?) {
         recipeTitleLabel.text = data?.label
+        recipeTitleLabel.textColor = .white
+        
         recipeSubtitleLabel.text = data?.source
+        recipeSubtitleLabel.textColor = Colors.lightSecondaryLabel
+        
         let totalTime = data?.totalTime != 0.0 ? Int(data?.totalTime ?? 50.0) : 50
         let yield = data?.yield != 0.0 ? Int(data?.yield ?? 4.0) : 4
         recipeTertiaryLabel.text = "Время приготовления: \(totalTime) минут, количество порций: \(yield)"
+    }
+    
+    // MARK: - Private Methods
+    
+    private func addShadows(to label: UILabel, with opacity: Float) {
+        label.layer.shadowColor = UIColor.black.cgColor
+        label.layer.shadowRadius = 1.0
+        label.layer.shadowOpacity = opacity
+        label.layer.shadowOffset = CGSize(width: 0, height: 0)
+        label.layer.masksToBounds = false
     }
 }
