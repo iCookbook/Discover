@@ -154,12 +154,39 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
         switch kind {
         case UICollectionView.elementKindSectionFooter:
             guard let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: LoadingCollectionViewFooter.identifier, for: indexPath) as? LoadingCollectionViewFooter else {
-                fatalError("Could not cast to `LoadingCollectionViewFooter` for indexPath \(indexPath)")
+                fatalError("Could not cast to `LoadingCollectionViewFooter` for indexPath \(indexPath) in viewForSupplementaryElementOfKind")
             }
             return footer
         default:
             // empty view
             return UICollectionReusableView()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        switch elementKind {
+        case UICollectionView.elementKindSectionFooter:
+            guard let footer = view as? LoadingCollectionViewFooter else {
+                fatalError("Could not cast to `LoadingCollectionViewFooter` for indexPath \(indexPath) in willDisplaySupplementaryView")
+            }
+            /// If it is not the first setup, we will start animating activity indicator.
+            if data.count > 0 {
+                footer.startActivityIndicator()
+            }
+        default:
+            break
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+        switch elementKind {
+        case UICollectionView.elementKindSectionFooter:
+            guard let footer = view as? LoadingCollectionViewFooter else {
+                fatalError("Could not cast to `LoadingCollectionViewFooter` for indexPath \(indexPath) in didEndDisplayingSupplementaryView")
+            }
+            footer.stopActivityIndicator()
+        default:
+            break
         }
     }
     
