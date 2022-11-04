@@ -114,7 +114,7 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LargeRecipeCollectionViewCell.identifier, for: indexPath) as? LargeRecipeCollectionViewCell else {
                 fatalError("Could not cast cell at indexPath \(indexPath) to 'LargeRecipeCollectionViewCell' in 'Discover' module")
             }
-            cell.configure(with: data[indexPath.row], dishOfTheDayLabelIsHidden: true)
+            cell.configure(with: data[indexPath.row], dishOfTheDayLabelIsHidden: false)
             return cell
         case 2:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UsualBCollectionViewCell.identifier, for: indexPath) as? UsualBCollectionViewCell else {

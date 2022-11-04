@@ -42,9 +42,9 @@ final class UsualCollectionViewCell: DiscoverCollectionViewCell {
             contentView.addSubview($0)
         }
         
-        addShadows(to: recipeTitleLabel, with: 0.25)
-        addShadows(to: recipeSubtitleLabel, with: 0.6)
-        addShadows(to: recipeTertiaryLabel, with: 0.4)
+        addShadows(to: recipeTitleLabel, opacity: 0.25)
+        addShadows(to: recipeSubtitleLabel, opacity: 0.6)
+        addShadows(to: recipeTertiaryLabel, opacity: 0.4)
         
         NSLayoutConstraint.activate([
             recipeImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor),
@@ -79,15 +79,5 @@ final class UsualCollectionViewCell: DiscoverCollectionViewCell {
         let totalTime = data.totalTime != 0.0 ? Int(data.totalTime ?? 50.0) : 50
         let yield = data.yield != 0.0 ? Int(data.yield ?? 4.0) : 4
         recipeTertiaryLabel.text = "Время приготовления: \(totalTime) минут, количество порций: \(yield)"
-    }
-    
-    // MARK: - Private Methods
-    
-    private func addShadows(to label: UILabel, with opacity: Float) {
-        label.layer.shadowColor = UIColor.black.cgColor
-        label.layer.shadowRadius = 1.0
-        label.layer.shadowOpacity = opacity
-        label.layer.shadowOffset = CGSize(width: 0, height: 0)
-        label.layer.masksToBounds = false
     }
 }
