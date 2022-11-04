@@ -16,8 +16,12 @@ final class DiscoverViewController: UIViewController {
     // MARK: - Private Properties
     
     private let output: DiscoverViewOutput
-    /// Array of recipes to show.
-    private var data: [Recipe]?
+    /// Link to the next page.
+    private var nextPageUrl: String?
+    /// Array of recipes.
+    private var data: [Recipe] = []
+    /// Defines whether fetching is in progress. It is being used for pagination.
+    private var isFetchingInProgress = false
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -26,7 +30,7 @@ final class DiscoverViewController: UIViewController {
         collectionView.backgroundColor = .clear
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 40, right: 0)
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         collectionView.register(UsualCollectionViewCell.self, forCellWithReuseIdentifier: UsualCollectionViewCell.identifier)
         collectionView.register(UsualBCollectionViewCell.self, forCellWithReuseIdentifier: UsualBCollectionViewCell.identifier)
         collectionView.register(LargeRecipeCollectionViewCell.self, forCellWithReuseIdentifier: LargeRecipeCollectionViewCell.identifier)
@@ -52,7 +56,7 @@ final class DiscoverViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
-        output.requestData()
+        output.requestData(urlString: nil)
     }
     
     // MARK: - Private Methods
@@ -60,7 +64,6 @@ final class DiscoverViewController: UIViewController {
     private func setupView() {
         title = Texts.Discover.title
         view.backgroundColor = Colors.systemBackground
-        
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -72,12 +75,16 @@ final class DiscoverViewController: UIViewController {
 }
 
 extension DiscoverViewController: DiscoverViewInput {
-    func fillData(with data: [Recipe]) {
-        self.data = data
+    func fillData(with data: [Recipe], nextPageUrl: String?) {
+        self.data.append(contentsOf: data)
+        self.nextPageUrl = nextPageUrl
         
         DispatchQueue.main.async {
             // no need to put self in capture list, because DispatchQueue does not capture self
-            self.collectionView.reloadData()
+            self.isFetchingInProgress = false
+            UIView.transition(with: self.collectionView, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                self.collectionView.reloadData()
+            })
         }
     }
     
@@ -91,7 +98,7 @@ extension DiscoverViewController: DiscoverViewInput {
 extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        data?.count ?? 0
+        data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -100,19 +107,19 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UsualCollectionViewCell.identifier, for: indexPath) as? UsualCollectionViewCell else {
                 fatalError("Could not cast cell at indexPath \(indexPath) to 'UsualCollectionViewCell' in 'Discover' module")
             }
-            cell.configure(with: data?[indexPath.row])
+            cell.configure(with: data[indexPath.row])
             return cell
         case 1:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LargeRecipeCollectionViewCell.identifier, for: indexPath) as? LargeRecipeCollectionViewCell else {
                 fatalError("Could not cast cell at indexPath \(indexPath) to 'LargeRecipeCollectionViewCell' in 'Discover' module")
             }
-            cell.configure(with: data?[indexPath.row], dishOfTheDayLabelIsHidden: true)
+            cell.configure(with: data[indexPath.row], dishOfTheDayLabelIsHidden: true)
             return cell
         case 2:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UsualBCollectionViewCell.identifier, for: indexPath) as? UsualBCollectionViewCell else {
                 fatalError("Could not cast cell at indexPath \(indexPath) to 'UsualBCollectionViewCell' in 'Discover' module")
             }
-            cell.configure(with: data?[indexPath.row])
+            cell.configure(with: data[indexPath.row])
             return cell
         default:
             fatalError("Unexpected value in switch: \(indexPath.row % 3)")
@@ -120,17 +127,25 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let recipe = data?[indexPath.row] else { return }
-        output.didSelectRecipe(recipe)
+        output.didSelectRecipe(data[indexPath.row])
         
         guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-        cell.transform = CGAffineTransform(scaleX: 0.99, y: 0.99)
+        cell.transform = CGAffineTransform(scaleX: 0.97, y: 0.97)
         
-//        UIView.animate(withDuration: 1.7, delay: 0.05, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.8, options: .allowUserInteraction, animations: {
-//            cell.transform = CGAffineTransform.identity
-//        })
-        UIView.animate(withDuration: 0.7, delay: 0.0, options: .allowUserInteraction, animations: {
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1.4, initialSpringVelocity: 0.1, options: .allowUserInteraction, animations: {
             cell.transform = CGAffineTransform.identity
         })
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        /// We need to check that it is not a setup (first launch, when `collectionView.contentOffset.y == 0` and make usual check for the end of the collection (scroll) view.
+        if (collectionView.contentOffset.y != 0 &&
+            collectionView.contentOffset.y >= (collectionView.contentSize.height - collectionView.bounds.size.height)) {
+            /// Fetcing should not be in progress and there should be valid next page url.
+            guard !isFetchingInProgress,
+                  let nextPageUrl = nextPageUrl else { return }
+            isFetchingInProgress = true
+            output.requestData(urlString: nextPageUrl)
+        }
     }
 }

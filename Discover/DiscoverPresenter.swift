@@ -8,6 +8,7 @@
 
 import Models
 import Networking
+import Resources
 
 final class DiscoverPresenter {
     weak var view: DiscoverViewInput?
@@ -30,8 +31,8 @@ extension DiscoverPresenter: DiscoverModuleInput {
 }
 
 extension DiscoverPresenter: DiscoverViewOutput {
-    func requestData() {
-        interactor.requestData()
+    func requestData(urlString: String?) {
+        interactor.requestData(urlString: urlString)
     }
     
     func didSelectRecipe(_ recipe: Recipe) {
@@ -49,19 +50,19 @@ extension DiscoverPresenter: DiscoverInteractorOutput {
                 recipes.append(recipe)
             }
         }
-        view?.fillData(with: recipes)
+        view?.fillData(with: recipes, nextPageUrl: response.links?.next?.href)
     }
     
     func handleError(_ error: NetworkManagerError) {
         switch error {
         case .invalidURL:
-            view?.showAlert(title: "Invalid url", message: "")
+            view?.showAlert(title: Texts.Errors.oops, message: Texts.Errors.restartApp)
         case .retainCycle:
-            view?.showAlert(title: "Unexpected error", message: "")
+            view?.showAlert(title: Texts.Errors.oops, message: Texts.Errors.restartApp)
         case .networkError(let error):
-            view?.showAlert(title: "Unexpected error", message: "\(error.localizedDescription)")
+            view?.showAlert(title: Texts.Errors.oops, message: "\(error.localizedDescription)")
         case .parsingJSONError:
-            view?.showAlert(title: "Internet error", message: "")
+            view?.showAlert(title: Texts.Errors.oops, message: Texts.Errors.somethingWentWrong)
         }
     }
 }

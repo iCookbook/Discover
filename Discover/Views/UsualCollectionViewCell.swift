@@ -24,6 +24,17 @@ final class UsualCollectionViewCell: DiscoverCollectionViewCell {
         return label
     }()
     
+    // MARK: - Life Cycle
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        recipeImageView.image = nil
+        recipeTitleLabel.text = ""
+        recipeSubtitleLabel.text = ""
+        recipeTertiaryLabel.text = ""
+    }
+    
     override func setupView() {
         super.setupView()
         
@@ -31,7 +42,7 @@ final class UsualCollectionViewCell: DiscoverCollectionViewCell {
             contentView.addSubview($0)
         }
         
-        addShadows(to: recipeTitleLabel, with: 0.6)
+        addShadows(to: recipeTitleLabel, with: 0.25)
         addShadows(to: recipeSubtitleLabel, with: 0.6)
         addShadows(to: recipeTertiaryLabel, with: 0.4)
         
@@ -57,15 +68,16 @@ final class UsualCollectionViewCell: DiscoverCollectionViewCell {
     
     // MARK: - Public Methods
     
-    public func configure(with data: Recipe?) {
-        recipeTitleLabel.text = data?.label
+    public func configure(with data: Recipe) {
+        recipeImageView.loadImage(for: data.images?.regular?.url)
+        recipeTitleLabel.text = data.label
         recipeTitleLabel.textColor = .white
         
-        recipeSubtitleLabel.text = data?.source
+        recipeSubtitleLabel.text = data.source
         recipeSubtitleLabel.textColor = Colors.lightSecondaryLabel
         
-        let totalTime = data?.totalTime != 0.0 ? Int(data?.totalTime ?? 50.0) : 50
-        let yield = data?.yield != 0.0 ? Int(data?.yield ?? 4.0) : 4
+        let totalTime = data.totalTime != 0.0 ? Int(data.totalTime ?? 50.0) : 50
+        let yield = data.yield != 0.0 ? Int(data.yield ?? 4.0) : 4
         recipeTertiaryLabel.text = "Время приготовления: \(totalTime) минут, количество порций: \(yield)"
     }
     

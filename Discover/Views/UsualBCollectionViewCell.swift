@@ -11,6 +11,16 @@ import CommonUI
 
 final class UsualBCollectionViewCell: DiscoverCollectionViewCell {
     
+    // MARK: - Life Cycle
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        recipeImageView.image = nil
+        recipeTitleLabel.text = ""
+        recipeSubtitleLabel.text = ""
+    }
+    
     override func setupView() {
         super.setupView()
         
@@ -36,8 +46,9 @@ final class UsualBCollectionViewCell: DiscoverCollectionViewCell {
     
     // MARK: - Public Methods
     
-    public func configure(with data: Recipe?) {
-        recipeTitleLabel.text = data?.label
-        recipeSubtitleLabel.text = data?.source
+    public func configure(with data: Recipe) {
+        recipeImageView.loadImage(for: data.images?.regular?.url)
+        recipeTitleLabel.text = data.label
+        recipeSubtitleLabel.text = data.source
     }
 }

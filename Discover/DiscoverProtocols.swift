@@ -17,17 +17,17 @@ public protocol DiscoverModuleOutput: AnyObject {
 }
 
 protocol DiscoverViewInput: AnyObject {
-    func fillData(with data: [Recipe])
+    func fillData(with data: [Recipe], nextPageUrl: String?)
     func showAlert(title: String, message: String)
 }
 
 protocol DiscoverViewOutput: AnyObject {
-    func requestData()
+    func requestData(urlString: String?)
     func didSelectRecipe(_ recipe: Recipe)
 }
 
 protocol DiscoverInteractorInput: AnyObject {
-    func requestData()
+    func requestData(urlString: String?)
 }
 
 protocol DiscoverInteractorOutput: AnyObject {
