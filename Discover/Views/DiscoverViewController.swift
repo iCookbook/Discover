@@ -169,8 +169,8 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
             guard let footer = view as? LoadingCollectionViewFooter else {
                 fatalError("Could not cast to `LoadingCollectionViewFooter` for indexPath \(indexPath) in willDisplaySupplementaryView")
             }
-            /// If it is not the first setup, we will start animating activity indicator.
-            if data.count > 0 {
+            /// If there is link to the next page, start loading.
+            if nextPageUrl != nil {
                 footer.startActivityIndicator()
             }
         default:
@@ -191,6 +191,11 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        CGSize(width: view.frame.size.width, height: 80)
+        /// If there is link to the next page, set size for footer, if not, set size for small inset.
+        if nextPageUrl != nil {
+            return CGSize(width: view.frame.size.width, height: 80)
+        } else {
+            return CGSize(width: view.frame.size.width, height: 20)
+        }
     }
 }
