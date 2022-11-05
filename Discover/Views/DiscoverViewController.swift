@@ -26,6 +26,7 @@ final class DiscoverViewController: UIViewController {
     /// Refresh control to implement _pull to refresh_
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .gray
         refreshControl.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
         return refreshControl
     }()
@@ -105,6 +106,8 @@ final class DiscoverViewController: UIViewController {
         view.addSubview(recipesCollectionView)
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
+        // removes text from back button's title
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
@@ -131,6 +134,13 @@ final class DiscoverViewController: UIViewController {
             offlineStackView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -40),
         ])
     }
+    
+    /// Turns off all activity indicators and refresh controls, sets `isFetchingInProgress` to default value.
+    private func resetAllActivity() {
+        activityIndicator.stopAnimating()
+        refreshControl.endRefreshing()
+        isFetchingInProgress = false
+    }
 }
 
 extension DiscoverViewController: DiscoverViewInput {
@@ -145,10 +155,8 @@ extension DiscoverViewController: DiscoverViewInput {
         self.nextPageUrl = nextPageUrl
         
         DispatchQueue.main.async {
-            // no need to put self in capture list, because DispatchQueue does not capture self
-            self.activityIndicator.stopAnimating()
-            self.refreshControl.endRefreshing()
-            self.isFetchingInProgress = false
+            // no need to put self in capture list, because DispatchQueue does not capture it
+            self.resetAllActivity()
             
             UIView.transition(with: self.recipesCollectionView, duration: 0.5, options: .transitionCrossDissolve, animations: { [unowned self] in
                 recipesCollectionView.reloadData()
@@ -158,8 +166,7 @@ extension DiscoverViewController: DiscoverViewInput {
     
     func showAlert(title: String, message: String) {
         DispatchQueue.main.async {
-            self.activityIndicator.stopAnimating()
-            self.refreshControl.endRefreshing()
+            self.resetAllActivity()
             print("❗️Alert:", title, message)
             
             if self.data.isEmpty {
@@ -237,6 +244,8 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
             return UICollectionReusableView()
         }
     }
+    
+    // MARK: Footer
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         switch elementKind {

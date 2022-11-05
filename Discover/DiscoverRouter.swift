@@ -17,8 +17,11 @@ final class DiscoverRouter {
 
 extension DiscoverRouter: DiscoverRouterInput {
     func openRecipeDetailsModule(for recipe: Recipe) {
-        let context = RecipeDetailsContext(moduleOutput: nil)
+        let context = RecipeDetailsContext(moduleOutput: self, recipe: recipe)
         let assembly = RecipeDetailsAssembly.assemble(with: context)
         viewController?.navigationController?.pushViewController(assembly.viewController, animated: true)
     }
+}
+
+extension DiscoverRouter: RecipeDetailsModuleOutput {
 }
