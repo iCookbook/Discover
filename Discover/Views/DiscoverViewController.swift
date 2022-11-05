@@ -91,17 +91,17 @@ final class DiscoverViewController: UIViewController {
 extension DiscoverViewController: DiscoverViewInput {
     func fillData(with data: [Recipe], nextPageUrl: String?, withOverridingCurrentData: Bool) {
         if withOverridingCurrentData {
-            // pagination
-            self.data.append(contentsOf: data)
-        } else {
             // first setup or pull to refresh
             self.data = data
-            refreshControl.endRefreshing()
+        } else {
+            // pagination
+            self.data.append(contentsOf: data)
         }
         self.nextPageUrl = nextPageUrl
         
         DispatchQueue.main.async {
             // no need to put self in capture list, because DispatchQueue does not capture self
+            self.refreshControl.endRefreshing()
             self.isFetchingInProgress = false
             UIView.transition(with: self.recipeCollectionView, duration: 0.5, options: .transitionCrossDissolve, animations: {
                 self.recipeCollectionView.reloadData()
