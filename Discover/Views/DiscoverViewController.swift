@@ -30,6 +30,15 @@ final class DiscoverViewController: UIViewController {
         return refreshControl
     }()
     
+    /// Activity indicator for displaying loading.
+    private let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.color = .gray
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicator
+    }()
+    
     /// Collection view with recipes.
     private lazy var recipeCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -75,7 +84,13 @@ final class DiscoverViewController: UIViewController {
         title = Texts.Discover.title
         view.backgroundColor = Colors.systemBackground
         view.addSubview(recipeCollectionView)
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        
         NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -20),
+            
             recipeCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             recipeCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             recipeCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
@@ -101,16 +116,20 @@ extension DiscoverViewController: DiscoverViewInput {
         
         DispatchQueue.main.async {
             // no need to put self in capture list, because DispatchQueue does not capture self
+            self.activityIndicator.stopAnimating()
             self.refreshControl.endRefreshing()
             self.isFetchingInProgress = false
-            UIView.transition(with: self.recipeCollectionView, duration: 0.5, options: .transitionCrossDissolve, animations: {
-                self.recipeCollectionView.reloadData()
+            UIView.transition(with: self.recipeCollectionView, duration: 0.5, options: .transitionCrossDissolve, animations: { [unowned self] in
+                recipeCollectionView.reloadData()
             })
         }
     }
     
     func showAlert(title: String, message: String) {
-        print("❗️Alert:", title, message)
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            print("❗️Alert:", title, message)
+        }
     }
 }
 
