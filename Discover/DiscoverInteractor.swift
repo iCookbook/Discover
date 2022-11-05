@@ -24,20 +24,31 @@ final class DiscoverInteractor {
 }
 
 extension DiscoverInteractor: DiscoverInteractorInput {
-    func requestData(urlString: String? = nil) {
-        /// We need to create different endpoints whether url was provided.
-        var endpoint: EndpointProtocol!
-        if let urlString = urlString {
-            endpoint = URLEndpoint(urlString: urlString)
-        } else {
-            endpoint = Endpoint.random()
+    func requestData(urlString: String?) {
+        
+        guard let urlString = urlString else {
+            output?.handleError(.invalidURL)
+            return
         }
+        let endpoint = URLEndpoint(urlString: urlString)
         
         let request = NetworkRequest(endpoint: endpoint)
         networkManager.getResponse(request: request) { [unowned self] (result) in
             switch result {
             case .success(let response):
-                output?.provideResponse(response)
+                output?.provideResponse(response, withOverridingCurrentData: false)
+            case .failure(let error):
+                output?.handleError(error)
+            }
+        }
+    }
+    
+    func requestRandomData(overrideCurrentData: Bool) {
+        let request = NetworkRequest(endpoint: Endpoint.random())
+        networkManager.getResponse(request: request) { [unowned self] (result) in
+            switch result {
+            case .success(let response):
+                output?.provideResponse(response, withOverridingCurrentData: overrideCurrentData)
             case .failure(let error):
                 output?.handleError(error)
             }

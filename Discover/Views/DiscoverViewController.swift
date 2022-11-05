@@ -22,6 +22,12 @@ final class DiscoverViewController: UIViewController {
     private var data: [Recipe] = []
     /// Defines whether fetching is in progress. It is being used for pagination.
     private var isFetchingInProgress = false
+    /// Refresh control to implement _pull to refresh_
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
+        return refreshControl
+    }()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -31,6 +37,7 @@ final class DiscoverViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        collectionView.addSubview(refreshControl)
         collectionView.register(UsualCollectionViewCell.self, forCellWithReuseIdentifier: UsualCollectionViewCell.identifier)
         collectionView.register(UsualBCollectionViewCell.self, forCellWithReuseIdentifier: UsualBCollectionViewCell.identifier)
         collectionView.register(LargeRecipeCollectionViewCell.self, forCellWithReuseIdentifier: LargeRecipeCollectionViewCell.identifier)
@@ -57,7 +64,7 @@ final class DiscoverViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
-        output.requestData(urlString: nil)
+        output.requestRandomData(overrideCurrentData: false)
     }
     
     // MARK: - Private Methods
@@ -73,11 +80,20 @@ final class DiscoverViewController: UIViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
+    
+    @objc private func handleRefreshControl() {
+        output.requestRandomData(overrideCurrentData: true)
+    }
 }
 
 extension DiscoverViewController: DiscoverViewInput {
-    func fillData(with data: [Recipe], nextPageUrl: String?) {
-        self.data.append(contentsOf: data)
+    func fillData(with data: [Recipe], nextPageUrl: String?, withOverridingCurrentData: Bool) {
+        if withOverridingCurrentData {
+            self.data.append(contentsOf: data)
+        } else {
+            self.data = data
+            refreshControl.endRefreshing()
+        }
         self.nextPageUrl = nextPageUrl
         
         DispatchQueue.main.async {

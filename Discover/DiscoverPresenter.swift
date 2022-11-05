@@ -31,6 +31,10 @@ extension DiscoverPresenter: DiscoverModuleInput {
 }
 
 extension DiscoverPresenter: DiscoverViewOutput {
+    func requestRandomData(overrideCurrentData: Bool) {
+        interactor.requestRandomData(overrideCurrentData: overrideCurrentData)
+    }
+    
     func requestData(urlString: String?) {
         interactor.requestData(urlString: urlString)
     }
@@ -41,16 +45,22 @@ extension DiscoverPresenter: DiscoverViewOutput {
 }
 
 extension DiscoverPresenter: DiscoverInteractorOutput {
-    func provideResponse(_ response: Response) {
-        guard let hits = response.hits else { return }
+    func provideResponse(_ response: Response, withOverridingCurrentData: Bool) {
         var recipes = [Recipe]()
         
-        for hit in hits {
-            if let recipe = hit.recipe {
-                recipes.append(recipe)
-            }
+        guard let hits = response.hits else {
+            handleError(.parsingJSONError)
+            return
         }
-        view?.fillData(with: recipes, nextPageUrl: response.links?.next?.href)
+        
+        for hit in hits {
+            guard let recipe = hit.recipe else {
+                handleError(.parsingJSONError)
+                return
+            }
+            recipes.append(recipe)
+        }
+        view?.fillData(with: recipes, nextPageUrl: response.links?.next?.href, withOverridingCurrentData: withOverridingCurrentData)
     }
     
     func handleError(_ error: NetworkManagerError) {
