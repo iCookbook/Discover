@@ -22,6 +22,7 @@ final class DiscoverViewController: UIViewController {
     private var data: [Recipe] = []
     /// Defines whether fetching is in progress. It is being used for pagination.
     private var isFetchingInProgress = false
+    
     /// Refresh control to implement _pull to refresh_
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -29,7 +30,8 @@ final class DiscoverViewController: UIViewController {
         return refreshControl
     }()
     
-    private lazy var collectionView: UICollectionView = {
+    /// Collection view with recipes.
+    private lazy var recipeCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: view.frame.size.width - 32, height: view.frame.size.height * 0.38)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -64,7 +66,7 @@ final class DiscoverViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
-        output.requestRandomData(overrideCurrentData: false)
+        output.requestRandomData()
     }
     
     // MARK: - Private Methods
@@ -72,25 +74,27 @@ final class DiscoverViewController: UIViewController {
     private func setupView() {
         title = Texts.Discover.title
         view.backgroundColor = Colors.systemBackground
-        view.addSubview(collectionView)
+        view.addSubview(recipeCollectionView)
         NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            recipeCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            recipeCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            recipeCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            recipeCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
     @objc private func handleRefreshControl() {
-        output.requestRandomData(overrideCurrentData: true)
+        output.requestRandomData()
     }
 }
 
 extension DiscoverViewController: DiscoverViewInput {
     func fillData(with data: [Recipe], nextPageUrl: String?, withOverridingCurrentData: Bool) {
         if withOverridingCurrentData {
+            // pagination
             self.data.append(contentsOf: data)
         } else {
+            // first setup or pull to refresh
             self.data = data
             refreshControl.endRefreshing()
         }
@@ -99,8 +103,8 @@ extension DiscoverViewController: DiscoverViewInput {
         DispatchQueue.main.async {
             // no need to put self in capture list, because DispatchQueue does not capture self
             self.isFetchingInProgress = false
-            UIView.transition(with: self.collectionView, duration: 0.5, options: .transitionCrossDissolve, animations: {
-                self.collectionView.reloadData()
+            UIView.transition(with: self.recipeCollectionView, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                self.recipeCollectionView.reloadData()
             })
         }
     }
@@ -156,8 +160,8 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         /// We need to check that it is not a setup (first launch, when `collectionView.contentOffset.y == 0` and make usual check for the end of the collection (scroll) view.
-        if (collectionView.contentOffset.y != 0 &&
-            collectionView.contentOffset.y >= (collectionView.contentSize.height - collectionView.bounds.size.height)) {
+        if (recipeCollectionView.contentOffset.y != 0 &&
+            recipeCollectionView.contentOffset.y >= (recipeCollectionView.contentSize.height - recipeCollectionView.bounds.size.height)) {
             /// Fetcing should not be in progress and there should be valid next page url.
             guard !isFetchingInProgress,
                   let nextPageUrl = nextPageUrl else { return }

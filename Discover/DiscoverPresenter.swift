@@ -31,8 +31,8 @@ extension DiscoverPresenter: DiscoverModuleInput {
 }
 
 extension DiscoverPresenter: DiscoverViewOutput {
-    func requestRandomData(overrideCurrentData: Bool) {
-        interactor.requestRandomData(overrideCurrentData: overrideCurrentData)
+    func requestRandomData() {
+        interactor.requestRandomData()
     }
     
     func requestData(urlString: String?) {

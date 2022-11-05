@@ -23,13 +23,13 @@ protocol DiscoverViewInput: AnyObject {
 
 protocol DiscoverViewOutput: AnyObject {
     func requestData(urlString: String?)
-    func requestRandomData(overrideCurrentData: Bool)
+    func requestRandomData()
     func didSelectRecipe(_ recipe: Recipe)
 }
 
 protocol DiscoverInteractorInput: AnyObject {
     func requestData(urlString: String?)
-    func requestRandomData(overrideCurrentData: Bool)
+    func requestRandomData()
 }
 
 protocol DiscoverInteractorOutput: AnyObject {

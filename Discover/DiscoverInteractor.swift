@@ -43,12 +43,12 @@ extension DiscoverInteractor: DiscoverInteractorInput {
         }
     }
     
-    func requestRandomData(overrideCurrentData: Bool) {
+    func requestRandomData() {
         let request = NetworkRequest(endpoint: Endpoint.random())
         networkManager.getResponse(request: request) { [unowned self] (result) in
             switch result {
             case .success(let response):
-                output?.provideResponse(response, withOverridingCurrentData: overrideCurrentData)
+                output?.provideResponse(response, withOverridingCurrentData: true)
             case .failure(let error):
                 output?.handleError(error)
             }
