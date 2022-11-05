@@ -40,7 +40,7 @@ final class DiscoverViewController: UIViewController {
     }()
     
     /// Collection view with recipes.
-    private lazy var recipeCollectionView: UICollectionView = {
+    private lazy var recipesCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: view.frame.size.width - 32, height: view.frame.size.height * 0.38)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -55,6 +55,25 @@ final class DiscoverViewController: UIViewController {
         collectionView.register(LoadingCollectionViewFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: LoadingCollectionViewFooter.identifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
+    }()
+    
+    /// Offline mode views.
+    private let largeIconImageView = UIImageView(image: Images.Discover.network)
+    private let emptyCollectionLabel: UILabel = {
+        let label = UILabel()
+        label.text = Texts.Discover.emptyCollectionViewText
+        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        return label
+    }()
+    private lazy var offlineStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [largeIconImageView, emptyCollectionLabel])
+        stackView.spacing = 24
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
     // MARK: - Init
@@ -83,23 +102,34 @@ final class DiscoverViewController: UIViewController {
     private func setupView() {
         title = Texts.Discover.title
         view.backgroundColor = Colors.systemBackground
-        view.addSubview(recipeCollectionView)
+        view.addSubview(recipesCollectionView)
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -20),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -40),
             
-            recipeCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            recipeCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            recipeCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            recipeCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            recipesCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            recipesCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            recipesCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            recipesCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
     @objc private func handleRefreshControl() {
         output.requestRandomData()
+    }
+    
+    private func turnOnOfflineMode() {
+        view.addSubview(offlineStackView)
+        
+        NSLayoutConstraint.activate([
+            offlineStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: view.layoutMargins.left),
+            offlineStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -view.layoutMargins.right),
+            offlineStackView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            offlineStackView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -40),
+        ])
     }
 }
 
@@ -119,8 +149,8 @@ extension DiscoverViewController: DiscoverViewInput {
             self.activityIndicator.stopAnimating()
             self.refreshControl.endRefreshing()
             self.isFetchingInProgress = false
-            UIView.transition(with: self.recipeCollectionView, duration: 0.5, options: .transitionCrossDissolve, animations: { [unowned self] in
-                recipeCollectionView.reloadData()
+            UIView.transition(with: self.recipesCollectionView, duration: 0.5, options: .transitionCrossDissolve, animations: { [unowned self] in
+                recipesCollectionView.reloadData()
             })
         }
     }
@@ -128,6 +158,7 @@ extension DiscoverViewController: DiscoverViewInput {
     func showAlert(title: String, message: String) {
         DispatchQueue.main.async {
             self.activityIndicator.stopAnimating()
+            self.turnOnOfflineMode()
             print("❗️Alert:", title, message)
         }
     }
@@ -179,8 +210,8 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         /// We need to check that it is not a setup (first launch, when `collectionView.contentOffset.y == 0` and make usual check for the end of the collection (scroll) view.
-        if (recipeCollectionView.contentOffset.y != 0 &&
-            recipeCollectionView.contentOffset.y >= (recipeCollectionView.contentSize.height - recipeCollectionView.bounds.size.height)) {
+        if (recipesCollectionView.contentOffset.y != 0 &&
+            recipesCollectionView.contentOffset.y >= (recipesCollectionView.contentSize.height - recipesCollectionView.bounds.size.height)) {
             /// Fetcing should not be in progress and there should be valid next page url.
             guard !isFetchingInProgress,
                   let nextPageUrl = nextPageUrl else { return }
