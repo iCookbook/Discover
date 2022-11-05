@@ -72,9 +72,7 @@ final class UsualCollectionViewCell: DiscoverCollectionViewCell {
         recipeImageView.loadImage(for: data.images?.regular?.url)
         recipeTitleLabel.text = data.label
         recipeTitleLabel.textColor = .white
-        
         recipeSubtitleLabel.text = data.source
-        recipeSubtitleLabel.textColor = Colors.lightSecondaryLabel
         
         let totalTime = data.totalTime != 0.0 ? Int(data.totalTime ?? 50.0) : 50
         let yield = data.yield != 0.0 ? Int(data.yield ?? 4.0) : 4

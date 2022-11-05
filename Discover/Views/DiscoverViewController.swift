@@ -108,7 +108,7 @@ final class DiscoverViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -40),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -view.layoutMargins.top * 3),
             
             recipesCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             recipesCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -149,6 +149,7 @@ extension DiscoverViewController: DiscoverViewInput {
             self.activityIndicator.stopAnimating()
             self.refreshControl.endRefreshing()
             self.isFetchingInProgress = false
+            
             UIView.transition(with: self.recipesCollectionView, duration: 0.5, options: .transitionCrossDissolve, animations: { [unowned self] in
                 recipesCollectionView.reloadData()
             })
@@ -158,8 +159,12 @@ extension DiscoverViewController: DiscoverViewInput {
     func showAlert(title: String, message: String) {
         DispatchQueue.main.async {
             self.activityIndicator.stopAnimating()
-            self.turnOnOfflineMode()
+            self.refreshControl.endRefreshing()
             print("❗️Alert:", title, message)
+            
+            if self.data.isEmpty {
+                self.turnOnOfflineMode()
+            }
         }
     }
 }

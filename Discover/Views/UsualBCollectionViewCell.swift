@@ -8,6 +8,7 @@
 import UIKit
 import Models
 import CommonUI
+import Resources
 
 final class UsualBCollectionViewCell: DiscoverCollectionViewCell {
     
@@ -50,5 +51,6 @@ final class UsualBCollectionViewCell: DiscoverCollectionViewCell {
         recipeImageView.loadImage(for: data.images?.regular?.url)
         recipeTitleLabel.text = data.label
         recipeSubtitleLabel.text = data.source
+        recipeSubtitleLabel.textColor = Colors.secondaryLabel
     }
 }
