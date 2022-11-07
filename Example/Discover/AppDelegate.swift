@@ -9,6 +9,7 @@
 import UIKit
 import Networking
 import Discover
+import Resources
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let navController = UINavigationController(rootViewController: assembly.viewController)
         navController.navigationBar.prefersLargeTitles = true
+        
+        // Resources.Fonts
+        Fonts.registerFonts()
+        navController.navigationBar.largeTitleTextAttributes = [.font: Fonts.title()]
+        navController.navigationBar.titleTextAttributes = [.font: Fonts.navControllerTitle()]
         
         window.rootViewController = navController
         window.makeKeyAndVisible()

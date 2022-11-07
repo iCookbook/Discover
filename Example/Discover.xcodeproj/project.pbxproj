@@ -257,6 +257,7 @@
 				"${BUILT_PRODUCTS_DIR}/Discover/Discover.framework",
 				"${BUILT_PRODUCTS_DIR}/Models/Models.framework",
 				"${BUILT_PRODUCTS_DIR}/Networking/Networking.framework",
+				"${BUILT_PRODUCTS_DIR}/Persistence/Persistence.framework",
 				"${BUILT_PRODUCTS_DIR}/RecipeDetails/RecipeDetails.framework",
 				"${BUILT_PRODUCTS_DIR}/Resources/Resources.framework",
 			);
@@ -266,6 +267,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Discover.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Models.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Networking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Persistence.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RecipeDetails.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Resources.framework",
 			);
