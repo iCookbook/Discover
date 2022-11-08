@@ -19,6 +19,7 @@ extension DiscoverRouter: DiscoverRouterInput {
     func openRecipeDetailsModule(for recipe: Recipe) {
         let context = RecipeDetailsContext(moduleOutput: self, recipe: recipe)
         let assembly = RecipeDetailsAssembly.assemble(with: context)
+        assembly.viewController.hidesBottomBarWhenPushed = true
         viewController?.navigationController?.pushViewController(assembly.viewController, animated: true)
     }
 }
