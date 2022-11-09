@@ -26,7 +26,7 @@ final class DiscoverViewController: UIViewController {
     /// Refresh control to implement _pull to refresh_
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-        refreshControl.tintColor = .gray
+        refreshControl.tintColor = .lightGray
         refreshControl.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
         return refreshControl
     }()
