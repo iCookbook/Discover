@@ -28,8 +28,8 @@ protocol DiscoverViewOutput: AnyObject {
 }
 
 protocol DiscoverInteractorInput: AnyObject {
-    func requestData(urlString: String?)
-    func requestRandomData()
+    func provideData(urlString: String?)
+    func provideRandomData()
 }
 
 protocol DiscoverInteractorOutput: AnyObject {

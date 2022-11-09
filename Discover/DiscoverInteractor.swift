@@ -24,7 +24,9 @@ final class DiscoverInteractor {
 }
 
 extension DiscoverInteractor: DiscoverInteractorInput {
-    func requestData(urlString: String?) {
+    /// Provides data by url.
+    /// - Parameter urlString: url to the source of data.
+    func provideData(urlString: String?) {
         
         guard let urlString = urlString else {
             output?.handleError(.invalidURL)
@@ -43,7 +45,8 @@ extension DiscoverInteractor: DiscoverInteractorInput {
         }
     }
     
-    func requestRandomData() {
+    /// Provides random data.
+    func provideRandomData() {
         let request = NetworkRequest(endpoint: Endpoint.random())
         networkManager.getResponse(request: request) { [unowned self] (result) in
             switch result {

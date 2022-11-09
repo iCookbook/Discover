@@ -32,11 +32,11 @@ extension DiscoverPresenter: DiscoverModuleInput {
 
 extension DiscoverPresenter: DiscoverViewOutput {
     func requestRandomData() {
-        interactor.requestRandomData()
+        interactor.provideRandomData()
     }
     
     func requestData(urlString: String?) {
-        interactor.requestData(urlString: urlString)
+        interactor.provideData(urlString: urlString)
     }
     
     func didSelectRecipe(_ recipe: Recipe) {
@@ -45,6 +45,10 @@ extension DiscoverPresenter: DiscoverViewOutput {
 }
 
 extension DiscoverPresenter: DiscoverInteractorOutput {
+    /// Provides response from the interactor.
+    /// - Parameters:
+    ///   - response: ``Response`` got from the server.
+    ///   - withOverridingCurrentData: defines whether this data show override current one. This is necessary for handling requesting random data (`true`) and data by provided url (`false`).
     func provideResponse(_ response: Response, withOverridingCurrentData: Bool) {
         var recipes = [Recipe]()
         
@@ -63,6 +67,8 @@ extension DiscoverPresenter: DiscoverInteractorOutput {
         view?.fillData(with: recipes, nextPageUrl: response.links?.next?.href, withOverridingCurrentData: withOverridingCurrentData)
     }
     
+    /// Provides data to show in alerts according to provided `error`.
+    /// - Parameter error: ``NetworkManagerError`` error instance.
     func handleError(_ error: NetworkManagerError) {
         switch error {
         case .invalidURL:
