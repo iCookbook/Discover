@@ -103,7 +103,7 @@ final class DiscoverViewController: UIViewController {
     private func setupView() {
         // removes text from back button's title
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationController?.navigationBar.largeTitleTextAttributes = [.font: Fonts.title()]
+        navigationController?.navigationBar.largeTitleTextAttributes = [.font: Fonts.largeTitle()]
         title = Texts.Discover.title
         view.backgroundColor = Colors.systemBackground
         

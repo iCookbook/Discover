@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Resources.Fonts
         Fonts.registerFonts()
-        navController.navigationBar.largeTitleTextAttributes = [.font: Fonts.title()]
+        navController.navigationBar.largeTitleTextAttributes = [.font: Fonts.largeTitle()]
         navController.navigationBar.titleTextAttributes = [.font: Fonts.navControllerTitle()]
         
         window.rootViewController = navController
