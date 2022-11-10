@@ -65,6 +65,11 @@ final class DiscoverViewController: RecipesCollectionViewController {
         output.requestRandomData()
     }
     
+    override func resetAllActivity() {
+        super.resetAllActivity()
+        refreshControl.endRefreshing()
+    }
+    
     // MARK: - Private Methods
     
     private func setupView() {
@@ -103,11 +108,28 @@ final class DiscoverViewController: RecipesCollectionViewController {
             offlineStackView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -40),
         ])
     }
+}
+
+// MARK: - DiscoverViewInput
+
+extension DiscoverViewController: DiscoverViewInput {
+    /// `func fillData(with:, nextPageUrl:, withOverridingCurrentData:)` method was implemented in ``RecipesCollectionViewController``.
     
-    override func resetAllActivity() {
-        super.resetAllActivity()
-        refreshControl.endRefreshing()
+    func showAlert(title: String, message: String) {
+        DispatchQueue.main.async {
+            self.resetAllActivity()
+            print("❗️Alert:", title, message)
+            
+            if self.data.isEmpty {
+                self.turnOnOfflineMode()
+            }
+        }
     }
+}
+
+// MARK: - Collection View
+
+extension DiscoverViewController {
     
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         /// We need to check that it is not a setup (first launch, when `collectionView.contentOffset.y == 0` and make usual check for the end of the collection (scroll) view.
@@ -149,38 +171,5 @@ final class DiscoverViewController: RecipesCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         super.collectionView(collectionView, didSelectItemAt: indexPath)
         output.didSelectRecipe(data[indexPath.row])
-    }
-}
-
-extension DiscoverViewController: DiscoverViewInput {
-    func fillData(with data: [Recipe], nextPageUrl: String?, withOverridingCurrentData: Bool) {
-        if withOverridingCurrentData {
-            // first setup or pull to refresh
-            self.data = data
-        } else {
-            // pagination
-            self.data.append(contentsOf: data)
-        }
-        self.nextPageUrl = nextPageUrl
-        
-        DispatchQueue.main.async {
-            // no need to put self in capture list, because DispatchQueue does not capture it
-            self.resetAllActivity()
-            
-            UIView.transition(with: self.recipesCollectionView, duration: 0.5, options: .transitionCrossDissolve, animations: { [unowned self] in
-                recipesCollectionView.reloadData()
-            })
-        }
-    }
-    
-    func showAlert(title: String, message: String) {
-        DispatchQueue.main.async {
-            self.resetAllActivity()
-            print("❗️Alert:", title, message)
-            
-            if self.data.isEmpty {
-                self.turnOnOfflineMode()
-            }
-        }
     }
 }
