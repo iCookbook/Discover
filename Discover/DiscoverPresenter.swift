@@ -10,7 +10,6 @@ import Common
 import Resources
 
 final class DiscoverPresenter: BaseRecipesPresenter {
-    weak var view: DiscoverViewInput?
     
     // MARK: - Init
     

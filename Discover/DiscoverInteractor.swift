@@ -10,7 +10,6 @@ import Common
 import Networking
 
 final class DiscoverInteractor: BaseRecipesInteractor {
-    weak var output: DiscoverInteractorOutput?
 }
 
 extension DiscoverInteractor: DiscoverInteractorInput {
