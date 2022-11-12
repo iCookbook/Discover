@@ -6,21 +6,11 @@
 //  
 //
 
-import Models
+import Common
 import Networking
 
-final class DiscoverInteractor {
+final class DiscoverInteractor: BaseRecipesInteractor {
     weak var output: DiscoverInteractorOutput?
-    
-    // MARK: - Private Properties
-    
-    private let networkManager: NetworkManagerProtocol
-    
-    // MARK: - Init
-    
-    init(networkManager: NetworkManagerProtocol) {
-        self.networkManager = networkManager
-    }
 }
 
 extension DiscoverInteractor: DiscoverInteractorInput {
@@ -38,20 +28,7 @@ extension DiscoverInteractor: DiscoverInteractorInput {
         networkManager.getResponse(request: request) { [unowned self] (result) in
             switch result {
             case .success(let response):
-                output?.provideResponse(response, withOverridingCurrentData: false)
-            case .failure(let error):
-                output?.handleError(error)
-            }
-        }
-    }
-    
-    /// Provides random data.
-    func provideRandomData() {
-        let request = NetworkRequest(endpoint: Endpoint.random())
-        networkManager.getResponse(request: request) { [unowned self] (result) in
-            switch result {
-            case .success(let response):
-                output?.provideResponse(response, withOverridingCurrentData: true)
+                output?.didProvidedResponse(response, withOverridingCurrentData: false)
             case .failure(let error):
                 output?.handleError(error)
             }

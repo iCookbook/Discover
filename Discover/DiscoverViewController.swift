@@ -7,15 +7,14 @@
 //
 
 import UIKit
-import Resources
 import Models
+import Common
 import CommonUI
+import Resources
 
-final class DiscoverViewController: RecipesCollectionViewController {
+final class DiscoverViewController: BaseRecipesViewController {
     
     // MARK: - Private Properties
-    
-    private let output: DiscoverViewOutput
     
     /// Refresh control to implement _pull to refresh_
     private lazy var refreshControl: UIRefreshControl = {
@@ -43,18 +42,6 @@ final class DiscoverViewController: RecipesCollectionViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    
-    // MARK: - Init
-    
-    init(output: DiscoverViewOutput) {
-        self.output = output
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     // MARK: - Life Cycle
     
@@ -98,7 +85,7 @@ final class DiscoverViewController: RecipesCollectionViewController {
         output.requestRandomData()
     }
     
-    private func turnOnOfflineMode() {
+    override func turnOnOfflineMode() {
         view.addSubview(offlineStackView)
         
         NSLayoutConstraint.activate([
@@ -113,34 +100,31 @@ final class DiscoverViewController: RecipesCollectionViewController {
 // MARK: - DiscoverViewInput
 
 extension DiscoverViewController: DiscoverViewInput {
-    /// `func fillData(with:, nextPageUrl:, withOverridingCurrentData:)` method was implemented in ``RecipesCollectionViewController``.
-    
-    func showAlert(title: String, message: String) {
-        DispatchQueue.main.async {
-            self.resetAllActivity()
-            print("❗️Alert:", title, message)
-            
-            if self.data.isEmpty {
-                self.turnOnOfflineMode()
-            }
-        }
-    }
 }
 
 // MARK: - Collection View
 
 extension DiscoverViewController {
     
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        /// We need to check that it is not a setup (first launch, when `collectionView.contentOffset.y == 0` and make usual check for the end of the collection (scroll) view.
-        if (recipesCollectionView.contentOffset.y != 0 &&
-            recipesCollectionView.contentOffset.y >= (recipesCollectionView.contentSize.height - recipesCollectionView.bounds.size.height)) {
-            /// Fetcing should not be in progress and there should be valid next page url.
-            guard !isFetchingInProgress,
-                  let nextPageUrl = nextPageUrl else { return }
-            isFetchingInProgress = true
-            output.requestData(urlString: nextPageUrl)
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        super.scrollViewDidScroll(scrollView)
+        /// We are sure that `nextPageUrl` is not `nil`.
+        guard let nextPageUrl = nextPageUrl else { return }
+        
+        guard let output = output as? DiscoverViewOutput else {
+            showAlert(title: Texts.Errors.oops, message: Texts.Errors.unexpectedError)
+            return
         }
+        /*
+        guard let output = output as? DiscoverViewOutput,
+              let nextPageUrl = nextPageUrl
+        else {
+            showAlert(title: Texts.Errors.oops, message: Texts.Errors.unexpectedError)
+            return
+        }
+         */
+        isFetchingInProgress = true
+        output.requestData(urlString: nextPageUrl)
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
