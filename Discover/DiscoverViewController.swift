@@ -7,21 +7,14 @@
 //
 
 import UIKit
-import Resources
 import Models
+import Common
 import CommonUI
+import Resources
 
-final class DiscoverViewController: UIViewController {
+final class DiscoverViewController: BaseRecipesViewController {
     
     // MARK: - Private Properties
-    
-    private let output: DiscoverViewOutput
-    /// Link to the next page.
-    private var nextPageUrl: String?
-    /// Array of recipes.
-    private var data: [Recipe] = []
-    /// Defines whether fetching is in progress. It is being used for pagination.
-    private var isFetchingInProgress = false
     
     /// Refresh control to implement _pull to refresh_
     private lazy var refreshControl: UIRefreshControl = {
@@ -29,33 +22,6 @@ final class DiscoverViewController: UIViewController {
         refreshControl.tintColor = .lightGray
         refreshControl.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
         return refreshControl
-    }()
-    
-    /// Activity indicator for displaying loading.
-    private let activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.color = .gray
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        return activityIndicator
-    }()
-    
-    /// Collection view with recipes.
-    private lazy var recipesCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: view.frame.size.width - 32, height: view.frame.size.height * 0.38)
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .clear
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
-        collectionView.addSubview(refreshControl)
-        collectionView.register(RecipeCollectionViewCell.self, forCellWithReuseIdentifier: RecipeCollectionViewCell.identifier)
-        collectionView.register(UsualCollectionViewCell.self, forCellWithReuseIdentifier: UsualCollectionViewCell.identifier)
-        collectionView.register(LargeRecipeCollectionViewCell.self, forCellWithReuseIdentifier: LargeRecipeCollectionViewCell.identifier)
-        collectionView.register(LoadingCollectionViewFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: LoadingCollectionViewFooter.identifier)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        return collectionView
     }()
     
     /// Offline mode views.
@@ -77,18 +43,6 @@ final class DiscoverViewController: UIViewController {
         return stackView
     }()
     
-    // MARK: - Init
-    
-    init(output: DiscoverViewOutput) {
-        self.output = output
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -96,6 +50,11 @@ final class DiscoverViewController: UIViewController {
         
         setupView()
         output.requestRandomData()
+    }
+    
+    override func resetAllActivity() {
+        super.resetAllActivity()
+        refreshControl.endRefreshing()
     }
     
     // MARK: - Private Methods
@@ -107,6 +66,7 @@ final class DiscoverViewController: UIViewController {
         view.backgroundColor = Colors.systemBackground
         
         view.addSubview(recipesCollectionView)
+        recipesCollectionView.addSubview(refreshControl)
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         
@@ -125,7 +85,7 @@ final class DiscoverViewController: UIViewController {
         output.requestRandomData()
     }
     
-    private func turnOnOfflineMode() {
+    override func turnOnOfflineMode() {
         view.addSubview(offlineStackView)
         
         NSLayoutConstraint.activate([
@@ -135,57 +95,18 @@ final class DiscoverViewController: UIViewController {
             offlineStackView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -40),
         ])
     }
-    
-    /// Turns off all activity indicators and refresh controls, sets `isFetchingInProgress` to default value.
-    private func resetAllActivity() {
-        activityIndicator.stopAnimating()
-        refreshControl.endRefreshing()
-        isFetchingInProgress = false
-    }
 }
+
+// MARK: - DiscoverViewInput
 
 extension DiscoverViewController: DiscoverViewInput {
-    func fillData(with data: [Recipe], nextPageUrl: String?, withOverridingCurrentData: Bool) {
-        if withOverridingCurrentData {
-            // first setup or pull to refresh
-            self.data = data
-        } else {
-            // pagination
-            self.data.append(contentsOf: data)
-        }
-        self.nextPageUrl = nextPageUrl
-        
-        DispatchQueue.main.async {
-            // no need to put self in capture list, because DispatchQueue does not capture it
-            self.resetAllActivity()
-            
-            UIView.transition(with: self.recipesCollectionView, duration: 0.5, options: .transitionCrossDissolve, animations: { [unowned self] in
-                recipesCollectionView.reloadData()
-            })
-        }
-    }
-    
-    func showAlert(title: String, message: String) {
-        DispatchQueue.main.async {
-            self.resetAllActivity()
-            print("❗️Alert:", title, message)
-            
-            if self.data.isEmpty {
-                self.turnOnOfflineMode()
-            }
-        }
-    }
 }
 
-// MARK: - UICollectionView
+// MARK: - Collection View
 
-extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension DiscoverViewController {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        data.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.row % 3 {
         case 0:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecipeCollectionViewCell.identifier, for: indexPath) as? RecipeCollectionViewCell else {
@@ -197,7 +118,7 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LargeRecipeCollectionViewCell.identifier, for: indexPath) as? LargeRecipeCollectionViewCell else {
                 fatalError("Could not cast cell at indexPath \(indexPath) to 'LargeRecipeCollectionViewCell' in 'Discover' module")
             }
-            cell.configure(with: data[indexPath.row])
+            cell.configure(with: data[indexPath.row], dishOfTheDayLabelIsHidden: false)
             return cell
         case 2:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UsualCollectionViewCell.identifier, for: indexPath) as? UsualCollectionViewCell else {
@@ -210,15 +131,9 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        super.collectionView(collectionView, didSelectItemAt: indexPath)
         output.didSelectRecipe(data[indexPath.row])
-        
-        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-        cell.transform = CGAffineTransform(scaleX: 0.97, y: 0.97)
-        
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1.4, initialSpringVelocity: 0.1, options: .allowUserInteraction, animations: {
-            cell.transform = CGAffineTransform.identity
-        })
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -228,59 +143,14 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
             /// Fetcing should not be in progress and there should be valid next page url.
             guard !isFetchingInProgress,
                   let nextPageUrl = nextPageUrl else { return }
+            
+            guard let output = output as? DiscoverViewOutput else {
+                showAlert(title: Texts.Errors.oops, message: Texts.Errors.unexpectedError)
+                return
+            }
+            
             isFetchingInProgress = true
             output.requestData(urlString: nextPageUrl)
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionView.elementKindSectionFooter:
-            guard let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: LoadingCollectionViewFooter.identifier, for: indexPath) as? LoadingCollectionViewFooter else {
-                fatalError("Could not cast to `LoadingCollectionViewFooter` for indexPath \(indexPath) in viewForSupplementaryElementOfKind")
-            }
-            return footer
-        default:
-            // empty view
-            return UICollectionReusableView()
-        }
-    }
-    
-    // MARK: Footer
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-        switch elementKind {
-        case UICollectionView.elementKindSectionFooter:
-            guard let footer = view as? LoadingCollectionViewFooter else {
-                fatalError("Could not cast to `LoadingCollectionViewFooter` for indexPath \(indexPath) in willDisplaySupplementaryView")
-            }
-            /// If there is link to the next page, start loading.
-            if nextPageUrl != nil {
-                footer.startActivityIndicator()
-            }
-        default:
-            break
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
-        switch elementKind {
-        case UICollectionView.elementKindSectionFooter:
-            guard let footer = view as? LoadingCollectionViewFooter else {
-                fatalError("Could not cast to `LoadingCollectionViewFooter` for indexPath \(indexPath) in didEndDisplayingSupplementaryView")
-            }
-            footer.stopActivityIndicator()
-        default:
-            break
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        /// If there is link to the next page, set size for footer, if not, set size for small inset.
-        if nextPageUrl != nil {
-            return CGSize(width: view.frame.size.width, height: 80)
-        } else {
-            return CGSize(width: view.frame.size.width, height: 20)
         }
     }
 }
