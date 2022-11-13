@@ -10,12 +10,6 @@ import Common
 import Resources
 
 final class DiscoverPresenter: BaseRecipesPresenter {
-    
-    // MARK: - Init
-    
-    init(router: DiscoverRouterInput, interactor: DiscoverInteractorInput) {
-        super.init(router: router, interactor: interactor)
-    }
 }
 
 extension DiscoverPresenter: DiscoverModuleInput {

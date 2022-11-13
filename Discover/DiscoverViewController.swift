@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Models
 import Common
 import CommonUI
 import Resources
@@ -131,26 +130,72 @@ extension DiscoverViewController {
         }
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        super.collectionView(collectionView, didSelectItemAt: indexPath)
-        output.didSelectRecipe(data[indexPath.row])
-    }
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         /// We need to check that it is not a setup (first launch, when `collectionView.contentOffset.y == 0` and make usual check for the end of the collection (scroll) view.
         if (recipesCollectionView.contentOffset.y != 0 &&
             recipesCollectionView.contentOffset.y >= (recipesCollectionView.contentSize.height - recipesCollectionView.bounds.size.height)) {
             /// Fetcing should not be in progress and there should be valid next page url.
             guard !isFetchingInProgress,
-                  let nextPageUrl = nextPageUrl else { return }
-            
-            guard let output = output as? DiscoverViewOutput else {
-                showAlert(title: Texts.Errors.oops, message: Texts.Errors.unexpectedError)
-                return
-            }
+                  let nextPageUrl = nextPageUrl,
+                  let output = output as? DiscoverViewOutput
+            else { return }
             
             isFetchingInProgress = true
-            output.requestData(urlString: nextPageUrl)
+            /// Because it is _event handling_, we need to use `userInteractive` quality of service.
+            DispatchQueue.global(qos: .userInteractive).async {
+                output.requestData(urlString: nextPageUrl)
+            }
+        }
+    }
+    
+    // MARK: Footer
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionFooter:
+            guard let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: LoadingCollectionViewFooter.identifier, for: indexPath) as? LoadingCollectionViewFooter else {
+                fatalError("Could not cast to `LoadingCollectionViewFooter` for indexPath \(indexPath) in viewForSupplementaryElementOfKind")
+            }
+            return footer
+        default:
+            // empty view
+            return UICollectionReusableView()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        switch elementKind {
+        case UICollectionView.elementKindSectionFooter:
+            guard let footer = view as? LoadingCollectionViewFooter else {
+                fatalError("Could not cast to `LoadingCollectionViewFooter` for indexPath \(indexPath) in willDisplaySupplementaryView")
+            }
+            /// If there is link to the next page, start loading.
+            if nextPageUrl != nil {
+                footer.startActivityIndicator()
+            }
+        default:
+            break
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+        switch elementKind {
+        case UICollectionView.elementKindSectionFooter:
+            guard let footer = view as? LoadingCollectionViewFooter else {
+                fatalError("Could not cast to `LoadingCollectionViewFooter` for indexPath \(indexPath) in didEndDisplayingSupplementaryView")
+            }
+            footer.stopActivityIndicator()
+        default:
+            break
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        /// If there is link to the next page, set size for footer, if not, set size for small inset.
+        if nextPageUrl != nil {
+            return CGSize(width: view.frame.size.width, height: 80)
+        } else {
+            return CGSize(width: view.frame.size.width, height: 20)
         }
     }
 }
