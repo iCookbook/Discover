@@ -18,7 +18,7 @@ extension DiscoverInteractor: DiscoverInteractorInput {
     func provideData(urlString: String?) {
         
         guard let urlString = urlString else {
-            output?.handleError(.invalidURL)
+            presenter?.handleError(.invalidURL)
             return
         }
         let endpoint = URLEndpoint(urlString: urlString)
@@ -27,9 +27,9 @@ extension DiscoverInteractor: DiscoverInteractorInput {
         networkManager.getResponse(request: request) { [unowned self] (result) in
             switch result {
             case .success(let response):
-                output?.didProvidedResponse(response, withOverridingCurrentData: false)
+                presenter?.didProvidedResponse(response, withOverridingCurrentData: false)
             case .failure(let error):
-                output?.handleError(error)
+                presenter?.handleError(error)
             }
         }
     }
