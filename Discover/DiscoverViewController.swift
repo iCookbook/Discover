@@ -48,7 +48,7 @@ final class DiscoverViewController: BaseRecipesViewController {
         super.viewDidLoad()
         
         setupView()
-        output.requestRandomData()
+        presenter.requestRandomData()
     }
     
     override func resetAllActivity() {
@@ -81,7 +81,7 @@ final class DiscoverViewController: BaseRecipesViewController {
     }
     
     @objc private func handleRefreshControl() {
-        output.requestRandomData()
+        presenter.requestRandomData()
     }
     
     override func turnOnOfflineMode() {
@@ -137,13 +137,13 @@ extension DiscoverViewController {
             /// Fetcing should not be in progress and there should be valid next page url.
             guard !isFetchingInProgress,
                   let nextPageUrl = nextPageUrl,
-                  let output = output as? DiscoverViewOutput
+                  let presenter = presenter as? DiscoverViewOutput
             else { return }
             
             isFetchingInProgress = true
             /// Because it is _event handling_, we need to use `userInteractive` quality of service.
             DispatchQueue.global(qos: .userInteractive).async {
-                output.requestData(urlString: nextPageUrl)
+                presenter.requestData(urlString: nextPageUrl)
             }
         }
     }

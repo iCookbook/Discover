@@ -26,12 +26,12 @@ public final class DiscoverAssembly {
         let router = DiscoverRouter()
         let interactor = DiscoverInteractor(networkManager: context.moduleDependency)
         let presenter = DiscoverPresenter(router: router, interactor: interactor)
-        let viewController = DiscoverViewController(output: presenter)
+        let viewController = DiscoverViewController(presenter: presenter)
         
         presenter.view = viewController
         presenter.moduleOutput = context.moduleOutput
         
-        interactor.output = presenter
+        interactor.presenter = presenter
         router.viewController = viewController
         
         return DiscoverAssembly(view: viewController, input: presenter, router: router)
