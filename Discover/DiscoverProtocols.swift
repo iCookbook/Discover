@@ -18,11 +18,9 @@ protocol DiscoverViewInput: BaseRecipesViewInput {
 }
 
 protocol DiscoverViewOutput: BaseRecipesViewOutput {
-    func requestData(urlString: String?)
 }
 
 protocol DiscoverInteractorInput: BaseRecipesInteractorInput {
-    func provideData(urlString: String?)
 }
 
 protocol DiscoverInteractorOutput: BaseRecipesInteractorOutput {
