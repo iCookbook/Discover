@@ -3,7 +3,6 @@
 //  Discover
 //
 //  Created by Егор Бадмаев on 27.10.2022.
-//  
 //
 
 import UIKit
@@ -24,11 +23,11 @@ final class DiscoverViewController: BaseRecipesViewController {
     }()
     
     /// Offline mode views.
-    private let largeIconImageView = UIImageView(image: Images.Discover.network)
+    private let largeIconImageView = UIImageView(image: Images.Discover.bookFilled)
     private let emptyCollectionLabel: UILabel = {
         let label = UILabel()
         label.text = Texts.Discover.emptyCollectionViewText
-        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        label.font = Fonts.subtitle()
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
@@ -68,6 +67,7 @@ final class DiscoverViewController: BaseRecipesViewController {
         recipesCollectionView.addSubview(refreshControl)
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
+        largeIconImageView.tintColor = Colors.appColor
         
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
