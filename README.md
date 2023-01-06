@@ -12,12 +12,16 @@ This module is opened at the start of the application that is described in [AppC
 
 This module has 4 dependencies:
 
-- `CommonUI` for some reasons:
+- [CommonUI](https://github.com/iCookbook/CommonUI) for some reasons:
     * Image loader in `UIImageView`
     * Access to `UIButton`'s creators
-- `Resources` for access to resources of the application
-- `Models` to use `Recipe` model
-- `Networking` to fetch recipes from the server
-- `RecipeDetails` to open this module after user tapps on a recipe.
+- [Resources](https://github.com/iCookbook/Resources) for access to resources of the application
+- [Models](https://github.com/iCookbook/Models) to use `Recipe` model
+- [Networking](https://github.com/iCookbook/Networking) to fetch recipes from the server
+- [RecipeDetails](https://github.com/iCookbook/RecipeDetails) to open this module after user tapps on a recipe.
 
 ## Screenshots
+
+---
+
+For more details, read [GitHub Wiki](https://github.com/iCookbook/Discover/wiki) documentation
