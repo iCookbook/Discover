@@ -134,17 +134,8 @@ extension DiscoverViewController {
         /// We need to check that it is not a setup (first launch, when `collectionView.contentOffset.y == 0` and make usual check for the end of the collection (scroll) view.
         if (recipesCollectionView.contentOffset.y != 0 &&
             recipesCollectionView.contentOffset.y >= (recipesCollectionView.contentSize.height - recipesCollectionView.bounds.size.height)) {
-            /// Fetcing should not be in progress and there should be valid next page url.
-            guard !isFetchingInProgress,
-                  let nextPageUrl = nextPageUrl,
-                  let presenter = presenter as? DiscoverViewOutput
-            else { return }
-            
-            isFetchingInProgress = true
             /// Because it is _event handling_, we need to use `userInteractive` quality of service.
-            DispatchQueue.global(qos: .userInteractive).async {
-                presenter.requestData(urlString: nextPageUrl)
-            }
+            presenter.requestData()
         }
     }
 }
