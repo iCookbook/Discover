@@ -3,43 +3,30 @@
 //  Discover
 //
 //  Created by Егор Бадмаев on 27.10.2022.
-//  
 //
 
-import Models
-import Networking
+import Common
 
-public protocol DiscoverModuleInput {
-    var moduleOutput: DiscoverModuleOutput? { get }
+public protocol DiscoverModuleInput: BaseRecipesModuleInput {
 }
 
-public protocol DiscoverModuleOutput: AnyObject {
+public protocol DiscoverModuleOutput: BaseRecipesModuleOutput {
 }
 
-protocol DiscoverViewInput: AnyObject {
-    func fillData(with data: [Recipe], nextPageUrl: String?, withOverridingCurrentData: Bool)
-    func showAlert(title: String, message: String)
+protocol DiscoverViewInput: BaseRecipesViewInput {
 }
 
-protocol DiscoverViewOutput: AnyObject {
-    func requestData(urlString: String?)
-    func requestRandomData()
-    func didSelectRecipe(_ recipe: Recipe)
+protocol DiscoverViewOutput: BaseRecipesViewOutput {
 }
 
-protocol DiscoverInteractorInput: AnyObject {
-    func requestData(urlString: String?)
-    func requestRandomData()
+protocol DiscoverInteractorInput: BaseRecipesInteractorInput {
 }
 
-protocol DiscoverInteractorOutput: AnyObject {
-    func provideResponse(_ response: Response, withOverridingCurrentData: Bool)
-    func handleError(_ error: NetworkManagerError)
+protocol DiscoverInteractorOutput: BaseRecipesInteractorOutput {
 }
 
-protocol DiscoverRouterInput: AnyObject {
-    func openRecipeDetailsModule(for recipe: Recipe)
+protocol DiscoverRouterInput: BaseRecipesRouterInput {
 }
 
-protocol DiscoverRouterOutput: AnyObject {
+protocol DiscoverRouterOutput: BaseRecipesModuleOutput {
 }
