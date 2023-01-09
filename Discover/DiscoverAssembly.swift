@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Common
 
 public final class DiscoverAssembly {
     
@@ -20,7 +21,7 @@ public final class DiscoverAssembly {
     
     // MARK: - Public Methods
     
-    public static func assemble(with context: DiscoverDependenciesProtocol) -> DiscoverAssembly {
+    public static func assemble(with context: BaseRecipesDependenciesProtocol) -> DiscoverAssembly {
         let router = DiscoverRouter()
         let interactor = DiscoverInteractor(networkManager: context.networkManager)
         let presenter = DiscoverPresenter(router: router, interactor: interactor)

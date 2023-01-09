@@ -6,12 +6,6 @@
 //
 
 import Common
-import Networking
-
-public protocol DiscoverDependenciesProtocol {
-    var moduleOutput: DiscoverModuleOutput? { get set }
-    var networkManager: NetworkManagerProtocol { get }
-}
 
 public protocol DiscoverModuleInput: BaseRecipesModuleInput {
 }
